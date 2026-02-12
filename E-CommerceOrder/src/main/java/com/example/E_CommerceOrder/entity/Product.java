@@ -1,5 +1,87 @@
 package com.example.E_CommerceOrder.entity;
 
-public class Product {
 
+
+	import jakarta.persistence.CascadeType;
+	import jakarta.persistence.Column;
+	import jakarta.persistence.Entity;
+	import jakarta.persistence.GeneratedValue;
+	import jakarta.persistence.GenerationType;
+	import jakarta.persistence.Id;
+	import jakarta.persistence.JoinColumn;
+	import jakarta.persistence.ManyToOne;
+	import jakarta.persistence.OneToOne;
+
+	@Entity
+	public class Product {
+
+	    @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    private int  productId;
+
+	    @Column(nullable = false)
+	    private String productName;
+
+	    @Column(nullable = false)
+	    private Double price;
+
+	    private String description;
+
+	    @ManyToOne
+	    @JoinColumn(name = "category_id")
+	    private Category category;
+
+	    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+	    private Inventory inventory;
+
+		public int getProductId() {
+			return productId;
+		}
+
+		public void setProductId(int productId) {
+			this.productId = productId;
+		}
+
+		public String getProductName() {
+			return productName;
+		}
+
+		public void setProductName(String productName) {
+			this.productName = productName;
+		}
+
+		public Double getPrice() {
+			return price;
+		}
+
+		public void setPrice(Double price) {
+			this.price = price;
+		}
+
+		public String getDescription() {
+			return description;
+		}
+
+		public void setDescription(String description) {
+			this.description = description;
+		}
+
+		public Category getCategory() {
+			return category;
+		}
+
+		public void setCategory(Category category) {
+			this.category = category;
+		}
+
+		public Inventory getInventory() {
+			return inventory;
+		}
+
+		public void setInventory(Inventory inventory) {
+			this.inventory = inventory;
+		}
+
+	    
+	
 }
