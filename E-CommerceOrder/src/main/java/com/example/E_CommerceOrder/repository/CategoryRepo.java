@@ -1,5 +1,13 @@
 package com.example.E_CommerceOrder.repository;
 
-public interface CategoryRepo {
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.E_CommerceOrder.entity.Category;
+
+
+
+public interface CategoryRepo extends JpaRepository<Category, Integer> {
 
 }
