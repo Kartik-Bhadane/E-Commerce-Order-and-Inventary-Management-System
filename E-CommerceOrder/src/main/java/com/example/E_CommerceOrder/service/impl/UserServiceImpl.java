@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AuthResponsedto login(LoginRequestdto request) {
-        User user = userRepository.findByEmail(request.getEmail());
+        User user = userRepository.findByEmail(request.getEmail()).orElse(null);
 
         if (user == null || !user.getPassword().equals(request.getPassword())) {
             throw new RuntimeException("Invalid credentials");

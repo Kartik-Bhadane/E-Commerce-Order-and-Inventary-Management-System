@@ -63,7 +63,6 @@ package com.example.E_CommerceOrder.entity;
 		}
 
 	    
-	    // getters & setters
 	    
 	}
 
