@@ -1,87 +1,76 @@
 package com.example.E_CommerceOrder.entity;
 
+import jakarta.persistence.*;
 
+@Entity
+public class Product {
 
-	import jakarta.persistence.CascadeType;
-	import jakarta.persistence.Column;
-	import jakarta.persistence.Entity;
-	import jakarta.persistence.GeneratedValue;
-	import jakarta.persistence.GenerationType;
-	import jakarta.persistence.Id;
-	import jakarta.persistence.JoinColumn;
-	import jakarta.persistence.ManyToOne;
-	import jakarta.persistence.OneToOne;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int productId;
 
-	@Entity
-	public class Product {
+    @Column(nullable = false)
+    private String productName;
 
-	    @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private int  productId;
+    @Column(nullable = false)
+    private Double price;
 
-	    @Column(nullable = false)
-	    private String productName;
+    private String description;
 
-	    @Column(nullable = false)
-	    private Double price;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
-	    private String description;
+    // 🔥 UNIDIRECTIONAL
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "inventory_id")
+    private Inventory inventory;
 
-	    @ManyToOne
-	    @JoinColumn(name = "category_id")
-	    private Category category;
+    public int getProductId() {
+        return productId;
+    }
 
-	    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
-	    private Inventory inventory;
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
 
-		public int getProductId() {
-			return productId;
-		}
+    public String getProductName() {
+        return productName;
+    }
 
-		public void setProductId(int productId) {
-			this.productId = productId;
-		}
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
-		public String getProductName() {
-			return productName;
-		}
+    public Double getPrice() {
+        return price;
+    }
 
-		public void setProductName(String productName) {
-			this.productName = productName;
-		}
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 
-		public Double getPrice() {
-			return price;
-		}
+    public String getDescription() {
+        return description;
+    }
 
-		public void setPrice(Double price) {
-			this.price = price;
-		}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-		public String getDescription() {
-			return description;
-		}
+    public Category getCategory() {
+        return category;
+    }
 
-		public void setDescription(String description) {
-			this.description = description;
-		}
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
-		public Category getCategory() {
-			return category;
-		}
+    public Inventory getInventory() {
+        return inventory;
+    }
 
-		public void setCategory(Category category) {
-			this.category = category;
-		}
-
-		public Inventory getInventory() {
-			return inventory;
-		}
-
-		public void setInventory(Inventory inventory) {
-			this.inventory = inventory;
-		}
-
-	    
-	
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
+    }
 }

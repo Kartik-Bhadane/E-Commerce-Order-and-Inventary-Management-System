@@ -31,38 +31,45 @@ public class SecurityConfig {
         http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
+
+            // 🔐 AUTHORIZATION RULES
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                .requestMatchers("/api/questions/**").authenticated()
-                .requestMatchers("/api/customer/**").hasRole("CUSTOMER")
-                .anyRequest().authenticated()
+                .requestMatchers("/api/auth/**").permitAll()       // login, register
+                .requestMatchers("/api/customer/**").authenticated() // profile
+                .anyRequest().permitAll()
             )
+
+            // 🚫 NO SESSION (JWT)
             .sessionManagement(sess ->
                 sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             );
 
+        // ✅ JWT FILTER (VERY IMPORTANT)
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
 
-    // 🔥 THIS FIXES CORS
+    // 🌐 CORS CONFIG
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:5173","http://10.148.190.185:5173"));
+        config.setAllowedOrigins(List.of(
+            "http://localhost:5173",
+            "http://10.148.190.185:5173"
+        ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source =
                 new UrlBasedCorsConfigurationSource();
-
         source.registerCorsConfiguration("/**", config);
         return source;
     }
 
+    // 🔑 PASSWORD ENCODER
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

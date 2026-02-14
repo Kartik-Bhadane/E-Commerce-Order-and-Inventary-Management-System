@@ -1,91 +1,78 @@
 package com.example.E_CommerceOrder.entity;
 
+import java.time.LocalDateTime;
+import java.util.List;
 
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "orders")
+public class Order {
 
-	import java.time.LocalDateTime;
-	import java.util.List;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int orderId;
 
-	import jakarta.persistence.CascadeType;
-	import jakarta.persistence.Entity;
-	import jakarta.persistence.GeneratedValue;
-	import jakarta.persistence.GenerationType;
-	import jakarta.persistence.Id;
-	import jakarta.persistence.JoinColumn;
-	import jakarta.persistence.ManyToOne;
-	import jakarta.persistence.OneToMany;
-	import jakarta.persistence.Table;
+    private LocalDateTime orderDate;
 
-	@Entity
-	@Table(name = "orders")
-	public class Order {
+    private String status;
 
-	    @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private int orderId;
+    private Double totalAmount;
 
-	    private LocalDateTime orderDate;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-	    
-	    private String status;
+    // 🔥 UNIDIRECTIONAL
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id") // FK in order_item table
+    private List<OrderItem> items;
 
-	    private Double totalAmount;
+    public int getOrderId() {
+        return orderId;
+    }
 
-	    @ManyToOne
-	    @JoinColumn(name = "user_id")
-	    private User user;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
 
-	    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	    private List<OrderItem> items;
+    public LocalDateTime getOrderDate() {
+        return orderDate;
+    }
 
-		public int getOrderId() {
-			return orderId;
-		}
+    public void setOrderDate(LocalDateTime orderDate) {
+        this.orderDate = orderDate;
+    }
 
-		public void setOrderId(int orderId) {
-			this.orderId = orderId;
-		}
+    public String getStatus() {
+        return status;
+    }
 
-		public LocalDateTime getOrderDate() {
-			return orderDate;
-		}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-		public void setOrderDate(LocalDateTime orderDate) {
-			this.orderDate = orderDate;
-		}
+    public Double getTotalAmount() {
+        return totalAmount;
+    }
 
-		public String getStatus() {
-			return status;
-		}
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
 
-		public void setStatus(String status) {
-			this.status = status;
-		}
+    public User getUser() {
+        return user;
+    }
 
-		public Double getTotalAmount() {
-			return totalAmount;
-		}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-		public void setTotalAmount(Double totalAmount) {
-			this.totalAmount = totalAmount;
-		}
+    public List<OrderItem> getItems() {
+        return items;
+    }
 
-		public User getUser() {
-			return user;
-		}
-
-		public void setUser(User user) {
-			this.user = user;
-		}
-
-		public List<OrderItem> getItems() {
-			return items;
-		}
-
-		public void setItems(List<OrderItem> items) {
-			this.items = items;
-		}
-
-	    
-	
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
+    }
 }

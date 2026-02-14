@@ -1,24 +1,9 @@
-package com.example.E_CommerceOrder.entity;
+package com.example.E_CommerceOrder.dto;
 
-import jakarta.persistence.*;
-
-@Entity
-public class Category {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int categoryId;
+public class CategoryRequestDto {
 
     private String categoryName;
     private String description;
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
 
     public String getCategoryName() {
         return categoryName;
