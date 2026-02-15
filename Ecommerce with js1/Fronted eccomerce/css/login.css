@@ -1,0 +1,131 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* BACKGROUND */
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #1f3c88, #0f2027);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CONTAINER */
+.login-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CARD */
+.login-card {
+    background: white;
+    padding: 35px 30px;
+    width: 320px;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    text-align: center;
+}
+
+/* LOGO */
+.logo-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.logo-section img {
+    height: 90px;
+    width: auto;
+}
+
+/* HEADINGS */
+.login-card h1 {
+    margin-bottom: 5px;
+    font-size: 24px;
+}
+
+.subtitle {
+    color: gray;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* INPUTS */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #ff7b00;
+    outline: none;
+}
+
+/* FORGOT PASSWORD */
+.forgot {
+    text-align: right;
+    margin-bottom: 15px;
+}
+
+.forgot a {
+    font-size: 12px;
+    color: #ff7b00;
+    text-decoration: none;
+}
+
+/* BUTTON */
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(to right, #ff7b00, #ff9900);
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    opacity: 0.9;
+}
+
+/* BOTTOM TEXT */
+.bottom-text {
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+.bottom-text a {
+    color: #ff7b00;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* RESPONSIVE */
+@media (max-width: 450px) {
+    .login-card {
+        width: 90%;
+        padding: 25px;
+    }
+
+    .logo-section img {
+        height: 75px;
+    }
+}

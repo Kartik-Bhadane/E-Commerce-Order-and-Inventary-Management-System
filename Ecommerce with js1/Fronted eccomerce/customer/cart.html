@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Cart | VisionMart</title>
+    <link rel="stylesheet" href="../css/customer.css">
+</head>
+<body>
+
+<div class="navbar">
+    <h2>VISIONMART</h2>
+    <div class="nav-links">
+        <a href="../index.html">Main Site</a>
+        <a href="dashboard.html">Home</a>
+        <a href="cart.html" class="active">Cart</a>
+        <a href="orders.html">Orders</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </div>
+</div>
+
+<div class="container">
+    <h1>My Cart</h1>
+
+   <!-- IMPORTANT: keep these IDs -->
+
+    <div class="payment-section">
+        <div id="cart-list" class="product-grid"></div>
+<h2>Total: ₹<span id="total-price">0</span></h2>
+        <!-- <h2>Total: ₹<span id="total-price">0</span></h2> -->
+
+        <select id="payment-method">
+            <option value="">Select Payment Method</option>
+            <option value="CARD">Card</option>
+            <option value="UPI">UPI</option>
+            <option value="COD">Cash on Delivery</option>
+        </select>
+
+        <button onclick="placeOrder()">Place Order</button>
+    </div>
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/auth-guard.js"></script>
+<script src="../js/cart.js"></script>
+
+<script>
+    requireLogin();
+    loadCart();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+// document.addEventListener("DOMContentLoaded", () => {
+
+//     checkAuth();
+// });
+
+
+// // ================================
+// // CHECK AUTHENTICATION
+// // ================================
+
+// function checkAuth() {
+
+//     const token = TokenService.get();
+//     const user = UserService.get();
+
+//     const currentPage = window.location.pathname;
+
+//     // 🔐 Protect Admin Pages
+//     if (currentPage.includes("admin")) {
+
+//         if (!token || !user) {
+//             redirect("../login.html");
+//             return;
+//         }
+
+//         if (user.role !== "ADMIN") {
+//             showMessage("Access Denied", "error");
+//             redirect("../index.html");
+//             return;
+//         }
+//     }
+
+//     // if (currentPage.includes("checkout") || 
+//         currentPage.includes("orders")) {
+
+//         if (!token) {
+//             showMessage("Please login first", "error");
+//             redirect("login.html");
+//             return;
+//         }
+//     }
+// }

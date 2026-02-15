@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reports | VisionMart</title>
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>VISIONMART</h2>
+    <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="inventory.html">Inventory</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="orders.html">Orders</a></li>
+        <li><a href="customers.html">Customers</a></li>
+        <li class="active"><a href="reports.html">Reports</a></li>
+        <li><a href="../index.html">Main Site</a></li>
+    </ul>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <h3>Sales Reports</h3>
+        <button onclick="downloadReport()">Download Report</button>
+    </div>
+
+    <div class="page-content">
+
+        <!-- REPORT CARDS -->
+        <div class="cards">
+
+            <div class="card">
+                <h3>Total Revenue</h3>
+                <span id="totalRevenue" style="color:#28a745;">$0</span>
+            </div>
+
+            <div class="card">
+                <h3>Total Orders</h3>
+                <span id="totalOrders">0</span>
+            </div>
+
+            <div class="card">
+                <h3>Best Product</h3>
+                <span id="bestProduct">-</span>
+            </div>
+
+            <div class="card">
+                <h3>New Customers</h3>
+                <span id="newCustomers">0</span>
+            </div>
+
+        </div>
+
+        <!-- MONTHLY OVERVIEW -->
+        <h2 style="margin:30px 0 15px;">Monthly Overview</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Month</th>
+                    <th>Revenue</th>
+                    <th>Orders</th>
+                    <th>Growth</th>
+                </tr>
+            </thead>
+
+            <tbody id="monthlyTable">
+                <!-- Data loaded by JS -->
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- JS -->
+<script src="../js/reports.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+// ===============================
+// SAMPLE REPORT DATA
+// ===============================
+
+const monthlyData = [
+    { month: "January", revenue: 10000, orders: 200 },
+    { month: "February", revenue: 12500, orders: 240 },
+    { month: "March", revenue: 9800, orders: 180 },
+    { month: "April", revenue: 15000, orders: 300 },
+    { month: "May", revenue: 17000, orders: 350 },
+    { month: "June", revenue: 21000, orders: 400 }
+];
+
+const bestProduct = "Laptop Pro";
+const newCustomers = 42;
+
+
+// ===============================
+// LOAD REPORTS
+// ===============================
+
+function loadReports() {
+
+    let totalRevenue = 0;
+    let totalOrders = 0;
+
+    const table = document.getElementById("monthlyTable");
+    table.innerHTML = "";
+
+    monthlyData.forEach((data, index) => {
+
+        totalRevenue += data.revenue;
+        totalOrders += data.orders;
+
+        let growth = 0;
+
+        if (index > 0) {
+            const prev = monthlyData[index - 1].revenue;
+            growth = ((data.revenue - prev) / prev * 100).toFixed(1);
+        }
+
+        let growthColor = growth >= 0 ? "#28a745" : "#dc3545";
+
+        table.innerHTML += `
+            <tr>
+                <td>${data.month}</td>
+                <td>$${data.revenue.toLocaleString()}</td>
+                <td>${data.orders}</td>
+                <td style="color:${growthColor}">
+                    ${index === 0 ? "-" : (growth > 0 ? "+" : "") + growth + "%"}
+                </td>
+            </tr>
+        `;
+    });
+
+    // Update Cards
+    document.getElementById("totalRevenue").innerText =
+        "$" + totalRevenue.toLocaleString();
+
+    document.getElementById("totalOrders").innerText =
+        totalOrders;
+
+    document.getElementById("bestProduct").innerText =
+        bestProduct;
+
+    document.getElementById("newCustomers").innerText =
+        newCustomers;
+}
+
+
+// ===============================
+// DOWNLOAD PDF (Simple Version)
+// ===============================
+
+function downloadPDF() {
+
+    const content = `
+        VisionMart Sales Report
+
+        Total Revenue: $${document.getElementById("totalRevenue").innerText}
+        Total Orders: ${document.getElementById("totalOrders").innerText}
+        Best Product: ${bestProduct}
+        New Customers: ${newCustomers}
+    `;
+
+    const blob = new Blob([content], { type: "text/plain" });
+    const link = document.createElement("a");
+
+    link.href = URL.createObjectURL(blob);
+    link.download = "visionmart-report.txt";
+    link.click();
+}
+
+
+// ===============================
+document.addEventListener("DOMContentLoaded", loadReports);

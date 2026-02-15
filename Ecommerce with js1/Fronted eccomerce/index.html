@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VisionMart - E-Commerce</title>
+
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+</head>
+<script src="js/utils.js"></script>
+<script src="js/navbar.js"></script>
+
+
+<body>
+
+<!-- NAVIGATION BAR -->
+<nav class="navbar">
+  <img src="assets/logo2.png" alt="VisionMart Logo" class="logo" />
+
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="customer/dashboard.html">Shop</a></li>
+    <li><a href="admin/dashboard.html" id="adminLink">Admin</a></li>
+    <li><a href="login.html" id="loginLink">Login</a></li>
+    <li><a href="register.html" id="registerLink">Register</a></li>
+    <li><a href="#" onclick="logout()" id="logoutBtn" style="display:none;">Logout</a></li>
+  </ul>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-text">
+      <h1>E-Commerce Order & Inventory<br>Management System</h1>
+      <p>
+        Manage orders, products, inventory, categories, and reports —
+        all in one secure dashboard.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="customer/dashboard.html" class="btn outline">Browse Products</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <h2>System Features</h2>
+
+  <div class="feature-grid">
+
+    <div class="feature-box">
+      <h3>Order Management</h3>
+      <p>Customers can add products to cart and checkout easily.</p>
+    </div>
+
+    <div class="feature-box">
+      <h3>Inventory Tracking</h3>
+      <p>Monitor stock levels and low-stock alerts in real time.</p>
+    </div>
+
+    <div class="feature-box">
+      <h3>Product Management</h3>
+      <p>Add, update, and manage product listings.</p>
+    </div>
+
+    <div class="feature-box">
+      <h3>Category Controls</h3>
+      <p>Organize products efficiently.</p>
+    </div>
+
+    <div class="feature-box">
+      <h3>Reports & Analytics</h3>
+      <p>View sales and inventory reports instantly.</p>
+    </div>
+
+    <div class="feature-box">
+      <h3>Secure Access</h3>
+      <p>JWT-based authentication system.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-box">
+      <h3>Quick Links</h3>
+      <a href="index.html">Home</a>
+      <a href="customer/dashboard.html">Shop</a>
+      <a href="login.html">Login</a>
+    </div>
+
+    <div class="footer-box">
+      <h3>Contact</h3>
+      <p>Email: support@visionmart.com</p>
+      <p>Phone: +91 9876543210</p>
+      <p>Location: Maharashtra, India</p>
+      <p>© 2026 VisionMart</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JS -->
+<script src="js/auth-guard.js"></script>
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/config.js"></script>
+
+<script>
+  toggleAuthLinks();
+  toggleAdminLink();
+
+  function logout() {
+    localStorage.clear();
+    window.location.href = "login.html";
+  }
+</script>
+
+</body>
+</html>

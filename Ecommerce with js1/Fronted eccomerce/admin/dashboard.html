@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Browse Products | VisionMart</title>
+
+    <!-- existing navbar + shop styles -->
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/shop.css">
+</head>
+<body>
+
+<!-- NAVBAR (same UI as your screenshot) -->
+<nav class="navbar">
+    <div class="logo">VISIONMART</div>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Search products...">
+        <button>Search</button>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="../index.html">Main Site</a></li>
+        <li><a href="dashboard.html" class="active">Home</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="orders.html">Orders</a></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+    </ul>
+</nav>
+
+<!-- PAGE TITLE -->
+<h2 style="margin:20px;">Browse Products</h2>
+
+<!-- 🔥 IMPORTANT: PRODUCT GRID -->
+<div class="product-grid" id="productGrid">
+    <!-- products will load here -->
+</div>
+
+<!-- JS (ORDER IS IMPORTANT) -->
+<script src="../js/config.js"></script>
+<script src="../js/auth-guard.js"></script>
+<script src="../js/products.js"></script>
+<script src="../js/cart.js"></script>
+<script src="../js/logout.js"></script>
+
+<script>
+    requireLogin();
+</script>
+
+</body>
+</html>

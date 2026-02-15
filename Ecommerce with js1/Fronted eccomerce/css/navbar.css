@@ -1,0 +1,106 @@
+/* NAVBAR CONTAINER */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 8%;
+    background-color: #111;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+}
+
+/* LOGO */
+.logo {
+    height: 45px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+/* NAV LINKS */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #ccc;
+    font-size: 15px;
+    font-weight: 500;
+    position: relative;
+    transition: 0.3s ease;
+}
+
+/* ORANGE HOVER EFFECT */
+.nav-links li a:hover {
+    color: #ff9800;
+}
+
+/* UNDERLINE ANIMATION */
+.nav-links li a::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background: #ff9800;
+    left: 0;
+    bottom: -6px;
+    transition: 0.3s ease;
+}
+
+.nav-links li a:hover::after,
+.nav-links li a.active::after {
+    width: 100%;
+}
+
+/* ACTIVE LINK */
+.nav-links li a.active {
+    color: #ff9800;
+}
+
+/* BUTTON STYLE LINK */
+.nav-links li a.btn-link {
+    background-color: #ff9800;
+    padding: 6px 14px;
+    border-radius: 4px;
+    color: #111;
+    font-weight: bold;
+}
+
+.nav-links li a.btn-link:hover {
+    background-color: #e68900;
+    color: #111;
+}
+
+/* RESPONSIVE NAVBAR */
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+        gap: 12px;
+    }
+
+    .nav-links li a {
+        display: block;
+        width: 100%;
+        padding: 8px 0;
+    }
+}

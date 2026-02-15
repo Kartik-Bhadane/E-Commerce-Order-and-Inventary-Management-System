@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Dashboard | VisionMart</title>
+    <link rel="stylesheet" href="../css/customer.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">
+        <h2>VISIONMART</h2>
+    </div>
+
+    <div class="search-box">
+        <input type="text" placeholder="Search products...">
+        <button>Search</button>
+    </div>
+
+    <div class="nav-links">
+        <a href="../index.html">Main Site</a>
+        <a href="dashboard.html" class="active">Home</a>
+        <a href="cart.html">Cart</a>
+        <a href="orders.html">Orders</a>
+        <a href="#" onclick="logout()">Logout</a>
+    </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+    <h1>Welcome to VisionMart</h1>
+    <p>Browse Our Products</p>
+
+    <!-- 🔥 PRODUCTS RENDER HERE -->
+    <div id="product-list" class="product-grid"></div>
+</div>
+
+<!-- JS -->
+<script src="../js/config.js"></script>
+<script src="../js/auth-guard.js"></script>
+<script src="../js/customer.js"></script>
+
+<script>
+    requireLogin();
+    loadProducts();
+</script>
+
+</body>
+</html>

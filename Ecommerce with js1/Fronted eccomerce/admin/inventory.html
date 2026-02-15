@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory | VisionMart</title>
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>VISIONMART</h2>
+    <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li class="active"><a href="inventory.html">Inventory</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="orders.html">Orders</a></li>
+        <li><a href="customers.html">Customers</a></li>
+        <li><a href="reports.html">Reports</a></li>
+        <li><a href="../index.html">Main Site</a></li>
+    </ul>
+</div>
+
+<div class="main">
+
+    <div class="topbar">
+        <h3>Inventory Management</h3>
+        <button onclick="addProduct()">Add Product</button>
+    </div>
+
+    <div class="page-content">
+
+        <!-- SUMMARY CARDS -->
+        <div class="cards">
+            <div class="card">
+                <h3>Total Products</h3>
+                <span id="totalProducts">0</span>
+            </div>
+            <div class="card">
+                <h3>In Stock</h3>
+                <span id="inStock" style="color:#28a745;">0</span>
+            </div>
+            <div class="card">
+                <h3>Low Stock</h3>
+                <span id="lowStock" style="color:#ffc107;">0</span>
+            </div>
+            <div class="card">
+                <h3>Out of Stock</h3>
+                <span id="outStock" style="color:#dc3545;">0</span>
+            </div>
+        </div>
+
+        <!-- PRODUCT TABLE -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Status</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Sales</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody id="inventoryTable"></tbody>
+        </table>
+
+    </div>
+</div>
+
+<!-- JS FILES -->
+<script src="../js/config.js"></script>
+<script src="../js/auth-guard.js"></script>
+<script src="../js/admin-inventory.js"></script>
+
+<script>
+    requireLogin();
+    requireAdmin();
+    loadInventory();
+</script>
+
+</body>
+</html>
