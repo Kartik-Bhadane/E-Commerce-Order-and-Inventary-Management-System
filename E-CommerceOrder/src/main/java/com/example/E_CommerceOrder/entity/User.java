@@ -3,7 +3,10 @@ package com.example.E_CommerceOrder.entity;
 
 
 	import java.util.List;
-	import jakarta.persistence.Column;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
 	import jakarta.persistence.Entity;
 	import jakarta.persistence.GeneratedValue;
 	import jakarta.persistence.GenerationType;
@@ -32,6 +35,7 @@ package com.example.E_CommerceOrder.entity;
 	    private String role; 
 
 	    @OneToMany(mappedBy = "user")
+	    @JsonIgnore
 	    private List<Order> orders;
 
 		public int getUserId() {

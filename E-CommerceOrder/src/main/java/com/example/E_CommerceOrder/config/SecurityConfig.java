@@ -34,9 +34,10 @@ public class SecurityConfig {
 
             // 🔐 AUTHORIZATION RULES
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()       // login, register
-                .requestMatchers("/api/customer/**").authenticated() // profile
-                .anyRequest().permitAll()
+            	    .requestMatchers("/api/auth/**").permitAll()
+            	    .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
+            	    .requestMatchers("/api/customer/**").hasAuthority("CUSTOMER")
+            	    .anyRequest().authenticated()
             )
 
             // 🚫 NO SESSION (JWT)
@@ -55,10 +56,9 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
 
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of(
-            "http://localhost:5173",
-            "http://10.148.190.185:5173"
-        ));
+
+        config.setAllowedOrigins(List.of("http://localhost:5173","http://10.148.190.185:5173","http://127.0.0.1:5500"));
+
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);

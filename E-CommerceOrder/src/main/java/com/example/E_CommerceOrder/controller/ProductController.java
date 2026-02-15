@@ -9,7 +9,7 @@ import com.example.E_CommerceOrder.entity.Product;
 import com.example.E_CommerceOrder.service.ProductService;
 
 @RestController
-@RequestMapping("/api/products")   
+@RequestMapping("/api/admin/products")   
 public class ProductController {
 
     private final ProductService productService;
