@@ -6,8 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.E_CommerceOrder.dto.OrderItemRequestdto;
-import com.example.E_CommerceOrder.dto.PlaceOrderRequestdto;
+import com.example.E_CommerceOrder.dto.*;
 import com.example.E_CommerceOrder.entity.*;
 import com.example.E_CommerceOrder.repository.*;
 import com.example.E_CommerceOrder.service.OrderService;
@@ -27,8 +26,32 @@ public class OrderServiceImpl implements OrderService {
         this.productRepo = productRepo;
     }
 
+   
+    private OrderResponsedto mapToDto(Order order) {
+
+        OrderResponsedto dto = new OrderResponsedto();
+        dto.setOrderId(order.getOrderId());
+        dto.setOrderDate(order.getOrderDate());
+        dto.setStatus(order.getStatus());
+        dto.setTotalAmount(order.getTotalAmount());
+
+        List<OrderItemResponsedto> itemDtos = new ArrayList<>();
+
+        for (OrderItem item : order.getItems()) {
+            itemDtos.add(new OrderItemResponsedto(
+                    item.getProduct().getProductId(),
+                    item.getProduct().getProductName(),
+                    item.getPrice(),
+                    item.getQuantity()
+            ));
+        }
+
+        dto.setItems(itemDtos);
+        return dto;
+    }
+
     @Override
-    public Order placeOrder(PlaceOrderRequestdto dto) {
+    public OrderResponsedto placeOrder(PlaceOrderRequestdto dto) {
 
         User user = userRepo.findById(dto.getUserId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -68,11 +91,11 @@ public class OrderServiceImpl implements OrderService {
         order.setItems(orderItems);
         order.setTotalAmount(totalAmount);
 
-        return orderRepo.save(order);
+        return mapToDto(orderRepo.save(order));
     }
 
     @Override
-    public Order cancelOrder(int orderId) {
+    public OrderResponsedto cancelOrder(int orderId) {
 
         Order order = orderRepo.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
@@ -89,17 +112,22 @@ public class OrderServiceImpl implements OrderService {
         }
 
         order.setStatus("CANCELLED");
-        return orderRepo.save(order);
+        return mapToDto(orderRepo.save(order));
     }
 
     @Override
-    public Order getOrderById(int orderId) {
-        return orderRepo.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("Order not found"));
+    public OrderResponsedto getOrderById(int orderId) {
+        return mapToDto(orderRepo.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found")));
     }
 
     @Override
-    public List<Order> getAllOrders() {
-        return orderRepo.findAll();
+    public List<OrderResponsedto> getAllOrders() {
+
+        List<OrderResponsedto> response = new ArrayList<>();
+        for (Order order : orderRepo.findAll()) {
+            response.add(mapToDto(order));
+        }
+        return response;
     }
 }

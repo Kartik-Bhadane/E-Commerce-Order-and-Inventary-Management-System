@@ -9,11 +9,10 @@ import com.example.E_CommerceOrder.entity.User;
 import com.example.E_CommerceOrder.repository.UserRepo;
 import com.example.E_CommerceOrder.service.UserService;
 
-
 @Service
 public class UserServiceImpl implements UserService {
 
-    private  UserRepo userRepository;
+    private final UserRepo userRepository;
 
     public UserServiceImpl(UserRepo userRepository) {
         this.userRepository = userRepository;
@@ -32,13 +31,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AuthResponsedto login(LoginRequestdto request) {
-        User user = userRepository.findByEmail(request.getEmail()).orElse(null);
 
-        if (user == null || !user.getPassword().equals(request.getPassword())) {
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
+
+        if (!user.getPassword().equals(request.getPassword())) {
             throw new RuntimeException("Invalid credentials");
         }
 
-        // Token logic skipped (out of scope)
-        return new AuthResponsedto("DUMMY_TOKEN", user.getRole());
+      
+        String dummyToken = "DUMMY_TOKEN";
+
+      
+        return new AuthResponsedto(
+                dummyToken,
+                user.getRole(),
+                user.getUserId()
+        );
     }
 }

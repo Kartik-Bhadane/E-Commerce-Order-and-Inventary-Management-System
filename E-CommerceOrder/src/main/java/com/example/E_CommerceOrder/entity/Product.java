@@ -25,6 +25,9 @@ public class Product {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "inventory_id")
     private Inventory inventory;
+    
+    
+    
 
     public int getProductId() {
         return productId;

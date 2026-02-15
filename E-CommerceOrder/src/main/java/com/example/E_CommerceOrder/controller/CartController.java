@@ -1,9 +1,10 @@
 package com.example.E_CommerceOrder.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.E_CommerceOrder.dto.AddToCartRequestdto;
-import com.example.E_CommerceOrder.entity.Cart;
+import com.example.E_CommerceOrder.dto.CartResponsedto;
 import com.example.E_CommerceOrder.service.CartService;
 
 @RestController
@@ -16,22 +17,22 @@ public class CartController {
         this.cartService = cartService;
     }
 
-   
     @PostMapping("/add")
-    public Cart addToCart(@RequestBody AddToCartRequestdto dto) {
-        return cartService.addToCart(dto);
+    public CartResponsedto addToCart(
+            @RequestBody AddToCartRequestdto dto,
+            Authentication authentication
+    ) {
+        return cartService.addToCart(dto, authentication.getName());
     }
 
-
-    @GetMapping("/{userId}")
-    public Cart viewCart(@PathVariable int userId) {
-        return cartService.viewCart(userId);
+    @GetMapping
+    public CartResponsedto viewCart(Authentication authentication) {
+        return cartService.viewCart(authentication.getName());
     }
 
-  
-    @DeleteMapping("/clear/{userId}")
-    public String clearCart(@PathVariable int userId) {
-        cartService.clearCart(userId);
+    @DeleteMapping("/clear")
+    public String clearCart(Authentication authentication) {
+        cartService.clearCart(authentication.getName());
         return "Cart cleared successfully";
     }
 }

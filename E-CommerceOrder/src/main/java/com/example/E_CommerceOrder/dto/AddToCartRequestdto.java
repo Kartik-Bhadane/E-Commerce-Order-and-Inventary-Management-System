@@ -4,12 +4,11 @@ public class AddToCartRequestdto {
 
     private int userId;
     private int productId;
-    private Integer quantity;
+    private int quantity;
 
     public int getUserId() {
         return userId;
     }
-
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -17,16 +16,14 @@ public class AddToCartRequestdto {
     public int getProductId() {
         return productId;
     }
-
     public void setProductId(int productId) {
         this.productId = productId;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
-
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 }

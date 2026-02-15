@@ -12,12 +12,9 @@ import com.example.E_CommerceOrder.exception.AuthException;
 import com.example.E_CommerceOrder.repository.UserRepo;
 import com.example.E_CommerceOrder.service.AuthService;
 
-
 @Service
 public class AuthServiceImpl implements AuthService {
 
-//    private  UserRepo userRepository;
-    
     private final UserRepo repo;
     private final JwtUtil jwtUtil;
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -27,9 +24,15 @@ public class AuthServiceImpl implements AuthService {
         this.jwtUtil = jwtUtil;
     }
 
+    // ================================
+    // REGISTER
+    // ================================
+    @Override
     public void register(RegisterRequestdto request) throws AuthException {
-        if (repo.findByEmail(request.email).isPresent())
+
+        if (repo.findByEmail(request.email).isPresent()) {
             throw new AuthException("Email already registered");
+        }
 
         User user = new User();
         user.setFullName(request.fullName);
@@ -40,15 +43,28 @@ public class AuthServiceImpl implements AuthService {
         repo.save(user);
     }
 
+    // ================================
+    // LOGIN
+    // ================================
+    @Override
     public AuthResponsedto login(LoginRequestdto request) throws AuthException {
+
         User user = repo.findByEmail(request.email)
                 .orElseThrow(() -> new AuthException("Invalid credentials"));
 
-        if (!encoder.matches(request.password, user.getPassword()))
+        if (!encoder.matches(request.password, user.getPassword())) {
             throw new AuthException("Invalid credentials");
+        }
 
-        String token = jwtUtil.generateToken(user.getEmail(), user.getRole());
-        return new AuthResponsedto(token, user.getRole());
+        String token = jwtUtil.generateToken(
+                user.getEmail(),
+                user.getRole()
+        );
+
+        return new AuthResponsedto(
+                token,
+                user.getRole(),
+                user.getUserId()
+        );
     }
-
 }

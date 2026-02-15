@@ -33,9 +33,9 @@ import jakarta.persistence.Column;
 
 	   
 	    private String role; 
-
-	    @OneToMany(mappedBy = "user")
 	    @JsonIgnore
+	    @OneToMany(mappedBy = "user")
+	  
 	    private List<Order> orders;
 
 		public int getUserId() {

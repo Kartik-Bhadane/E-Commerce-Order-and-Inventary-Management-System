@@ -1,13 +1,13 @@
 package com.example.E_CommerceOrder.service;
 
 import com.example.E_CommerceOrder.dto.AddToCartRequestdto;
-import com.example.E_CommerceOrder.entity.Cart;
+import com.example.E_CommerceOrder.dto.CartResponsedto;
 
 public interface CartService {
 
-    Cart addToCart(AddToCartRequestdto dto);
+    CartResponsedto addToCart(AddToCartRequestdto dto, String email);
 
-    Cart viewCart(int userId);
+    CartResponsedto viewCart(String email);
 
-    void clearCart(int userId);
+    void clearCart(String email);
 }

@@ -2,6 +2,7 @@ package com.example.E_CommerceOrder.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
@@ -13,6 +14,7 @@ public class Cart {
     private int cartId;
 
     @OneToOne
+    @JsonIgnore
     private User user;
 
     @OneToMany(

@@ -2,20 +2,16 @@ package com.example.E_CommerceOrder.service;
 
 import java.util.List;
 
+import com.example.E_CommerceOrder.dto.OrderResponsedto;
 import com.example.E_CommerceOrder.dto.PlaceOrderRequestdto;
-import com.example.E_CommerceOrder.entity.Order;
 
 public interface OrderService {
 
+    OrderResponsedto placeOrder(PlaceOrderRequestdto dto);
 
-    Order placeOrder(PlaceOrderRequestdto dto);
+    OrderResponsedto cancelOrder(int orderId);
 
+    OrderResponsedto getOrderById(int orderId);
 
-    Order cancelOrder(int orderId);
-
-    // VIEW ONE ORDER
-    Order getOrderById(int orderId);
-
- 
-    List<Order> getAllOrders();
+    List<OrderResponsedto> getAllOrders();
 }

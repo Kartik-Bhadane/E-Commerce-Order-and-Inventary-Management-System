@@ -1,10 +1,11 @@
 package com.example.E_CommerceOrder.service.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.E_CommerceOrder.dto.AddToCartRequestdto;
+import com.example.E_CommerceOrder.dto.*;
 import com.example.E_CommerceOrder.entity.*;
 import com.example.E_CommerceOrder.repository.*;
 import com.example.E_CommerceOrder.service.CartService;
@@ -24,11 +25,28 @@ public class CartServiceImpl implements CartService {
         this.productRepo = productRepo;
     }
 
- 
-    @Override
-    public Cart addToCart(AddToCartRequestdto dto) {
+    private CartResponsedto mapToDto(Cart cart) {
 
-        User user = userRepo.findById(dto.getUserId())
+        double total = 0;
+        List<CartItemResponsedto> items = new ArrayList<>();
+
+        for (CartItem item : cart.getItems()) {
+            items.add(new CartItemResponsedto(
+                    item.getProduct().getProductId(),
+                    item.getProduct().getProductName(),
+                    item.getProduct().getPrice(),
+                    item.getQuantity()
+            ));
+            total += item.getProduct().getPrice() * item.getQuantity();
+        }
+
+        return new CartResponsedto(cart.getCartId(), items, total);
+    }
+
+    @Override
+    public CartResponsedto addToCart(AddToCartRequestdto dto, String email) {
+
+        User user = userRepo.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         Product product = productRepo.findById(dto.getProductId())
@@ -60,14 +78,13 @@ public class CartServiceImpl implements CartService {
             cart.getItems().add(item);
         }
 
-        return cartRepo.save(cart);
+        return mapToDto(cartRepo.save(cart));
     }
 
-   
     @Override
-    public Cart viewCart(int userId) {
+    public CartResponsedto viewCart(String email) {
 
-        User user = userRepo.findById(userId)
+        User user = userRepo.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         Cart cart = cartRepo.findByUser(user);
@@ -76,12 +93,13 @@ public class CartServiceImpl implements CartService {
             throw new RuntimeException("Cart is empty");
         }
 
-        return cart;
+        return mapToDto(cart);
     }
-    @Override
-    public void clearCart(int userId) {
 
-        User user = userRepo.findById(userId)
+    @Override
+    public void clearCart(String email) {
+
+        User user = userRepo.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         Cart cart = cartRepo.findByUser(user);

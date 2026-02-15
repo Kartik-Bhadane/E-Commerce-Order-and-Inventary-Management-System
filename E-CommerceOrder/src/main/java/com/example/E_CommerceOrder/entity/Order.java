@@ -3,6 +3,8 @@ package com.example.E_CommerceOrder.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -20,6 +22,7 @@ public class Order {
     private Double totalAmount;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "user_id")
     private User user;
 
