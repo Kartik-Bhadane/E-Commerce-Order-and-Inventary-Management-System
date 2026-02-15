@@ -8,7 +8,7 @@ import com.example.E_CommerceOrder.dto.CartResponsedto;
 import com.example.E_CommerceOrder.service.CartService;
 
 @RestController
-@RequestMapping("/api/cart")
+@RequestMapping("/api/customer/cart")
 public class CartController {
 
     private final CartService cartService;

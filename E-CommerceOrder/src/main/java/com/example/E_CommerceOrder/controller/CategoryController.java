@@ -7,7 +7,7 @@ import com.example.E_CommerceOrder.entity.Category;
 import com.example.E_CommerceOrder.service.CategoryService;
 
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/api/admin/categories")
 public class CategoryController {
 
     private final CategoryService categoryService;

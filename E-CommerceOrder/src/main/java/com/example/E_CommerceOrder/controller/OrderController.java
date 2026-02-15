@@ -9,7 +9,7 @@ import com.example.E_CommerceOrder.dto.PlaceOrderRequestdto;
 import com.example.E_CommerceOrder.service.OrderService;
 
 @RestController
-@RequestMapping("/api/orders")
+@RequestMapping("/api/customer/orders")
 public class OrderController {
 
     private final OrderService orderService;
