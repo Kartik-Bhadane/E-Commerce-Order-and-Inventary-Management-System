@@ -2,37 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Orders | VisionMart</title>
-    <link rel="stylesheet" href="../css/customer.css">
+    <!-- <link rel="stylesheet" href="../css/navbar.css"> -->
+    <link rel="stylesheet" href="../css/orders.css">
 </head>
 <body>
 
 <div class="navbar">
-    <h2>VISIONMART</h2>
+    <div class="logo-text">VISIONMART</div>
     <div class="nav-links">
-        <a href="../index.html">Main Site</a>
-        <a href="dashboard.html">Home</a>
+        <a href="customerdash.html">Home</a>
         <a href="cart.html">Cart</a>
-        <a href="orders.html">Orders</a>
-        <a href="#" onclick="logout()">Logout</a>
+        <a href="orders.html" class="active">Orders</a>
+        <a href="#" class="logout-btn" onclick="logout()">Logout</a>
     </div>
 </div>
 
 <div class="container">
-    <h1>My Orders</h1>
+    <div class="page-header">
+        <h1>My Orders</h1>
+        <p>View and track your previous purchases</p>
+    </div>
 
-    <!-- Orders will load dynamically -->
-    <div id="order-list" class="product-grid"></div>
+    <div id="order-list" class="orders-grid">
+        </div>
 </div>
 
-<!-- JS FILES -->
 <script src="../js/config.js"></script>
 <script src="../js/auth-guard.js"></script>
 <script src="../js/orders.js"></script>
+<script src="../js/logout.js"></script>
 
 <script>
-    requireLogin();   // Protect page
-    loadMyOrders();   // Load orders from backend
+    // Execute on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        if(typeof requireLogin === 'function') requireLogin();
+        if(typeof loadMyOrders === 'function') loadMyOrders();
+    });
 </script>
 
 </body>

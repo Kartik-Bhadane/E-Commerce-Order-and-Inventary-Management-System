@@ -1,87 +1,104 @@
-console.log("✅ cart.js loaded");
+const formatRupee = (num) => {
+    return new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'INR',
+        maximumFractionDigits: 0
+    }).format(num);
+};
 
-const API_BASE_URL = "http://localhost:8080/api";
-const TOKEN_KEY = "token";
+const token = localStorage.getItem("token");
 
-document.addEventListener("DOMContentLoaded", loadCart);
+async function loadCart() {
 
-function loadCart() {
-  const token = localStorage.getItem(TOKEN_KEY);
+    const response = await fetch(`${API_BASE_URL}/customer/cart`, {
+        headers: {
+            "Authorization": "Bearer " + token
+        }
+    });
 
-  if (!token) {
-    alert("Please login");
-    window.location.href = "login.html";
-    return;
-  }
+    const data = await response.json();
 
-  fetch(`${API_BASE_URL}/cart`, {
-    headers: {
-      "Authorization": "Bearer " + token
-    }
-  })
-  .then(res => {
-    if (!res.ok) throw new Error("Failed to load cart");
-    return res.json();
-  })
-  .then(cart => {
-    const cartList = document.getElementById("cart-list");
-    const totalPrice = document.getElementById("total-price");
+    const cartList = document.getElementById('cart-list');
+    const subtotalEl = document.getElementById('subtotal-val');
+    const totalEl = document.getElementById('total-val');
+    const badgeEl = document.getElementById('item-count-badge');
 
     cartList.innerHTML = "";
 
-    if (!cart.items || cart.items.length === 0) {
-      cartList.innerHTML = "<p>Your cart is empty</p>";
-      totalPrice.innerText = "0";
-      return;
+    if (!data.items || data.items.length === 0) {
+        cartList.innerHTML = "<h3>Your cart is empty</h3>";
+        subtotalEl.innerText = formatRupee(0);
+        totalEl.innerText = formatRupee(0);
+        badgeEl.innerText = "0 Items";
+        return;
     }
 
-    cart.items.forEach(item => {
-      cartList.innerHTML += `
-        <div class="product-card">
-          <h3>${item.productName}</h3>
-          <p>Price: ₹${item.price}</p>
-          <p>Quantity: ${item.quantity}</p>
-          <p>Subtotal: ₹${item.price * item.quantity}</p>
-        </div>
-      `;
+    let totalAmount = 0;
+
+    data.items.forEach(item => {
+
+        let itemTotal = item.price * item.quantity;
+        totalAmount += itemTotal;
+
+        cartList.innerHTML += `
+            <div class="cart-item">
+                <div>
+                    <h4>${item.productName}</h4>
+                    <p>Quantity: ${item.quantity}</p>
+                </div>
+                <div>
+                    <span>${formatRupee(itemTotal)}</span>
+                </div>
+            </div>
+        `;
     });
 
-    totalPrice.innerText = cart.totalAmount;
-  })
-  .catch(err => {
-    console.error(err);
-    alert("Failed to load cart");
-  });
+    badgeEl.innerText = data.items.length + " Items";
+    subtotalEl.innerText = formatRupee(totalAmount);
+    totalEl.innerText = formatRupee(totalAmount);
 }
-function placeOrder() {
-  const token = localStorage.getItem("token");
-  const paymentMethod = document.getElementById("payment-method").value;
 
-  if (!paymentMethod) {
-    alert("Please select a payment method");
-    return;
-  }
+async function addToCart(productId, quantity = 1) {
 
-  fetch("http://localhost:8080/api/orders/place", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + token
-    },
-    body: JSON.stringify({
-      paymentMethod: paymentMethod
-    })
-  })
-  .then(res => {
-    if (!res.ok) throw new Error("Order failed");
-    return res.json();
-  })
-  .then(() => {
-    alert("✅ Order placed successfully");
-    window.location.href = "orders.html";
-  })
-  .catch(err => {
-    console.error(err);
-    alert("Failed to place order");
-  });
+    await fetch(`${API_BASE_URL}/customer/cart/add`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify({
+            productId: productId,
+            quantity: quantity
+        })
+    });
+
+    alert("Added to cart!");
+    loadCart();
 }
+
+async function clearCart() {
+
+    await fetch(`${API_BASE_URL}/customer/cart/clear`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": "Bearer " + token
+        }
+    });
+
+    loadCart();
+}
+async function placeOrder() {
+
+    const response = await fetch(`${API_BASE_URL}/customer/orders/place`, {
+        method: "POST",
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+    });
+
+    if (response.ok) {
+        window.location.href = "orders.html";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", loadCart);

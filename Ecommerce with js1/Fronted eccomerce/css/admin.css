@@ -5,7 +5,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 /* ============================= */
@@ -63,6 +63,99 @@ body {
     margin-left: 240px;
     width: 100%;
 }
+/* ============================= */
+/* ADMIN CONTAINER */
+/* ============================= */
+.admin-container {
+    margin-left: 260px;
+    padding: 40px;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* ============================= */
+/* FORM CARD */
+/* ============================= */
+.admin-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* ============================= */
+/* TITLE */
+/* ============================= */
+.admin-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #1f3c88;
+}
+
+/* ============================= */
+/* FORM */
+/* ============================= */
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Inputs */
+.admin-form input,
+.admin-form textarea {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+/* Textarea */
+.admin-form textarea {
+    resize: none;
+    height: 90px;
+}
+
+/* Focus Effect */
+.admin-form input:focus,
+.admin-form textarea:focus {
+    border-color: #1f3c88;
+    outline: none;
+    box-shadow: 0 0 6px rgba(31, 60, 136, 0.3);
+}
+
+/* ============================= */
+/* BUTTONS */
+/* ============================= */
+.admin-form button {
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    background: #1f3c88;
+    color: white;
+    transition: 0.3s;
+}
+
+.admin-form button:hover {
+    background: #142c66;
+}
+
+.admin-container > button {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #ff7b00;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.admin-container > button:hover {
+    background: #e66e00;
+}s
 
 /* ============================= */
 /* TOPBAR */
@@ -75,10 +168,6 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 0 30px;
-}
-
-.topbar h3 {
-    font-size: 20px;
 }
 
 .topbar button {
@@ -119,11 +208,6 @@ body {
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
-.card h3 {
-    margin-bottom: 10px;
-    color: #666;
-}
-
 .card span {
     font-size: 26px;
     font-weight: bold;
@@ -148,12 +232,10 @@ table td {
 
 table thead {
     background: #f0f2f8;
-    font-weight: 600;
 }
 
 table tr {
     border-bottom: 1px solid #eee;
-    transition: 0.2s;
 }
 
 table tbody tr:hover {
@@ -177,33 +259,28 @@ table tbody tr:hover {
 /* ============================= */
 /* BUTTONS */
 /* ============================= */
-.btn-edit {
-    background: #1f3c88;
-    color: white;
+.btn-edit,
+.btn-delete {
     border: none;
     padding: 6px 12px;
     border-radius: 5px;
     cursor: pointer;
-    transition: 0.2s;
+    color: white;
+}
+
+.btn-edit {
+    background: #1f3c88;
 }
 
 .btn-delete {
     background: #ff7b00;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.2s;
 }
-
-.btn-edit:hover { background: #142c66; }
-.btn-delete:hover { opacity: 0.9; }
 
 /* ============================= */
 /* FORM BOX */
 /* ============================= */
-.form-box {
+.form-box,
+.admin-container {
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -211,10 +288,11 @@ table tbody tr:hover {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    max-width: 400px;
-    margin-bottom: 30px;
+    max-width: 500px;
 }
 
+.admin-form input,
+.admin-form textarea,
 .form-box input {
     padding: 10px;
     border-radius: 6px;
@@ -222,33 +300,20 @@ table tbody tr:hover {
     outline: none;
 }
 
+.admin-form textarea {
+    resize: none;
+    height: 80px;
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus,
 .form-box input:focus {
     border-color: #1f3c88;
 }
 
 /* ============================= */
-/* RESPONSIVE */
+/* PRODUCT GRID */
 /* ============================= */
-@media (max-width: 768px) {
-
-    .sidebar {
-        width: 200px;
-    }
-
-    .main {
-        margin-left: 200px;
-    }
-
-    .cards {
-        flex-direction: column;
-    }
-
-    table th,
-    table td {
-        padding: 10px;
-        font-size: 14px;
-    }
-}
 .products-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -278,4 +343,28 @@ table tbody tr:hover {
     border: none;
     border-radius: 6px;
     cursor: pointer;
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+@media (max-width: 768px) {
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .main {
+        margin-left: 200px;
+    }
+
+    .cards {
+        flex-direction: column;
+    }
+
+    table th,
+    table td {
+        padding: 10px;
+        font-size: 14px;
+    }
 }

@@ -2,35 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Cart | VisionMart</title>
+    <title>Customers | VisionMart Admin</title>
+    <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
 
-<h2>My Cart</h2>
+<div class="sidebar">
+    <h2>VISIONMART</h2>
+    <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="inventory.html">Inventory</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li><a href="orders.html">Orders</a></li>
+        <li class="active"><a href="customers.html">Customers</a></li>
+        <li><a href="../index.html">Main Site</a></li>
+    </ul>
+</div>
 
-<table border="1" width="100%">
-    <thead>
-        <tr>
-            <th>Product ID</th>
-            <th>Quantity</th>
-        </tr>
-    </thead>
-    <tbody id="cartTable"></tbody>
-</table>
+<div class="main">
+    <div class="page-content">
+        <h2>Customers & Orders</h2>
 
-<br>
-<button onclick="placeOrder()">Place Order</button>
-<button onclick="logout()">Logout</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Email</th>
+                    <th>Ordered Products</th>
+                </tr>
+            </thead>
+            <tbody id="customerTable"></tbody>
+        </table>
+    </div>
+</div>
 
 <script src="../js/config.js"></script>
 <script src="../js/auth-guard.js"></script>
-<script src="../js/cart-view.js"></script>
-<script src="../js/order.js"></script>
-<script src="../js/logout.js"></script>
-
-<script>
-    requireLogin();
-</script>
+<script src="../js/admin-cust.js"></script>
 
 </body>
 </html>

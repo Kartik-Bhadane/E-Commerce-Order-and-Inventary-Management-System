@@ -1,4 +1,4 @@
-/* RESET */
+/* ===== RESET ===== */
 * {
     margin: 0;
     padding: 0;
@@ -6,62 +6,63 @@
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* BACKGROUND */
+/* ===== BACKGROUND ===== */
 body {
-    height: 100vh;
+    min-height: 100vh;
     background: linear-gradient(135deg, #1f3c88, #0f2027);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* CARD */
+/* ===== CONTAINER ===== */
 .login-container {
     width: 100%;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* ===== CARD ===== */
 .login-card {
     background: #ffffff;
-    padding: 45px 40px;
-    width: 400px;
-    border-radius: 15px;
+    padding: 40px 35px;
+    width: 450px;
+    border-radius: 12px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.25);
     text-align: center;
 }
 
-/* LOGO */
+/* ===== LOGO ===== */
 .logo-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
     margin-bottom: 25px;
 }
 
 .logo-section img {
-    width: 40px;
+    width: 42px;
 }
 
 .logo-section h2 {
     color: #1f3c88;
     font-weight: 700;
+    font-size: 22px;
 }
 
-/* HEADINGS */
+/* ===== HEADINGS ===== */
 .login-card h1 {
-    margin-bottom: 10px;
-    font-size: 26px;
+    margin-bottom: 8px;
+    font-size: 24px;
+    color: #222;
 }
 
 .subtitle {
-    color: gray;
+    color: #666;
     margin-bottom: 25px;
+    font-size: 14px;
 }
 
-/* INPUTS */
+/* ===== INPUTS ===== */
 .input-group {
     margin-bottom: 18px;
 }
@@ -72,15 +73,14 @@ body {
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 14px;
-    transition: 0.3s;
+    outline: none;
 }
 
 .input-group input:focus {
     border-color: #ff7b00;
-    outline: none;
 }
 
-/* BUTTON */
+/* ===== BUTTON ===== */
 .login-btn {
     width: 100%;
     padding: 12px;
@@ -88,21 +88,17 @@ body {
     border-radius: 8px;
     background: linear-gradient(to right, #ff7b00, #ff9900);
     color: white;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
     margin-top: 10px;
 }
 
-.login-btn:hover {
-    opacity: 0.9;
-}
-
-/* BOTTOM TEXT */
+/* ===== BOTTOM TEXT ===== */
 .bottom-text {
     margin-top: 20px;
     font-size: 14px;
+    color: #555;
 }
 
 .bottom-text a {
@@ -111,10 +107,10 @@ body {
     font-weight: 600;
 }
 
-/* RESPONSIVE */
-@media (max-width: 450px) {
+/* ===== RESPONSIVE ===== */
+@media (max-width: 500px) {
     .login-card {
-        width: 90%;
+        width: 100%;
         padding: 30px;
     }
 }

@@ -2,50 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Browse Products | VisionMart</title>
-
-    <!-- existing navbar + shop styles -->
-    <link rel="stylesheet" href="../css/navbar.css">
-    <link rel="stylesheet" href="../css/shop.css">
+    <title>Admin Dashboard | VisionMart</title>
+    <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
 
-<!-- NAVBAR (same UI as your screenshot) -->
-<nav class="navbar">
-    <div class="logo">VISIONMART</div>
-
-    <div class="search-bar">
-        <input type="text" placeholder="Search products...">
-        <button>Search</button>
-    </div>
-
-    <ul class="nav-links">
-        <li><a href="../index.html">Main Site</a></li>
-        <li><a href="dashboard.html" class="active">Home</a></li>
-        <li><a href="cart.html">Cart</a></li>
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>VISIONMART</h2>
+    <ul>
+        <li class="active"><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="inventory.html">Inventory</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="categories.html">Categories</a></li>
         <li><a href="orders.html">Orders</a></li>
-        <li><a href="#" onclick="logout()">Logout</a></li>
+        <li><a href="customers.html">Customers</a></li>
+        <li><a href="../index.html">Main Site</a></li>
     </ul>
-</nav>
-
-<!-- PAGE TITLE -->
-<h2 style="margin:20px;">Browse Products</h2>
-
-<!-- 🔥 IMPORTANT: PRODUCT GRID -->
-<div class="product-grid" id="productGrid">
-    <!-- products will load here -->
 </div>
 
-<!-- JS (ORDER IS IMPORTANT) -->
+<!-- MAIN CONTENT -->
+<div class="main">
+    <div class="page-content">
+
+        <h2>Dashboard Overview</h2>
+
+        <!-- STAT CARDS -->
+        <div class="cards">
+            <div class="card">
+                <h3>Total Products</h3>
+                <span id="totalProducts">0</span>
+            </div>
+
+            <div class="card">
+                <h3>Total Orders</h3>
+                <span id="totalOrders">0</span>
+            </div>
+
+            <div class="card">
+                <h3>Total Customers</h3>
+                <span id="totalCustomers">0</span>
+            </div>
+
+            <div class="card">
+                <h3>Total Revenue</h3>
+                <span id="totalRevenue">₹0</span>
+            </div>
+        </div>
+
+        <!-- RECENT ORDERS -->
+        <h3>Recent Orders</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Total Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="recentOrdersTable"></tbody>
+        </table>
+
+    </div>
+</div>
+
 <script src="../js/config.js"></script>
 <script src="../js/auth-guard.js"></script>
-<script src="../js/products.js"></script>
-<script src="../js/cart.js"></script>
-<script src="../js/logout.js"></script>
-
-<script>
-    requireLogin();
-</script>
+<script src="../js/admin-dashboard.js"></script>
 
 </body>
 </html>

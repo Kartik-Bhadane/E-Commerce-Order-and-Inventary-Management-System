@@ -1,7 +1,7 @@
 console.log("✅ customer.js loaded");
 
-// 🔹 LOAD PRODUCTS
 function loadProducts() {
+
   const productList = document.getElementById("product-list");
 
   if (!productList) {
@@ -15,6 +15,7 @@ function loadProducts() {
       return res.json();
     })
     .then(products => {
+
       console.log("📦 Products:", products);
       productList.innerHTML = "";
 
@@ -24,11 +25,12 @@ function loadProducts() {
       }
 
       products.forEach(p => {
+
         productList.innerHTML += `
           <div class="product-card">
-            <img src="${p.imageUrl || 'https://via.placeholder.com/200'}" />
             <h3>${p.productName}</h3>
             <p>₹${p.price}</p>
+            <p>Stock: ${p.inventory ? p.inventory.quantityAvailable : 0}</p>
             <button onclick="addToCart(${p.productId})">
               Add to Cart
             </button>
@@ -42,9 +44,7 @@ function loadProducts() {
     });
 }
 
-// 🔹 ADD TO CART
 function addToCart(productId) {
-  console.log("🛒 Add to cart clicked:", productId);
 
   const token = localStorage.getItem("token");
 
@@ -53,7 +53,7 @@ function addToCart(productId) {
     return;
   }
 
-  fetch(`${API_BASE_URL}/cart/add`, {
+  fetch(`${API_BASE_URL}/customer/cart/add`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -76,3 +76,5 @@ function addToCart(productId) {
     alert("❌ Failed to add to cart");
   });
 }
+
+window.onload = loadProducts;

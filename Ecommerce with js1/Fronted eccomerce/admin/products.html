@@ -2,186 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Products | VisionMart</title>
+    <title>Add Product | VisionMart Admin</title>
+
+    <!-- ✅ Use Admin CSS (NOT customer.css) -->
     <link rel="stylesheet" href="../css/admin.css">
-    <style>
-        img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 6px;
-        }
-    </style>
 </head>
 <body>
-    <div class="products-container" id="productsContainer">
-</div>
-
-
 <div class="sidebar">
     <h2>VISIONMART</h2>
     <ul>
         <li><a href="dashboard.html">Dashboard</a></li>
         <li><a href="inventory.html">Inventory</a></li>
         <li class="active"><a href="products.html">Products</a></li>
-        <li><a href="categories.html">Categorieas</a></li>
-        <li><a href="orders.html">Orders</a></li>
+        <li><a href="categories.html">Categories</a></li>
+        <li ><a href="orders.html">Orders</a></li>
         <li><a href="customers.html">Customers</a></li>
-        <li><a href="reports.html">Reports</a></li>
+        <li><a href="../index.html">Main Site</a></li>
     </ul>
 </div>
 
-<div class="main">
+    <div class="admin-container">
 
-    <div class="topbar">
-        <h3>Product Management</h3>
-    </div>
+        <h2>Add New Product</h2>
 
-    <div class="page-content">
+        <form id="product-form" class="admin-form">
 
-        <h2>Product List</h2>
+            <input 
+                type="text" 
+                id="p-name" 
+                placeholder="Product Name" 
+                required
+            >
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Stock</th>
-                </tr>
-            </thead>
+            <input 
+                type="number" 
+                id="p-price" 
+                placeholder="Price (₹)" 
+                required
+            >
 
-            <tbody>
+            <textarea 
+                id="p-desc" 
+                placeholder="Product Description"
+                required
+            ></textarea>
 
-                <tr>
-                    <td><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8"></td>
-                    <td>Laptop Pro</td>
-                    <td>Electronics</td>
-                    <td>$1200</td>
-                    <td>25</td>
-                </tr>
+            <input 
+                type="text" 
+                id="p-img" 
+                placeholder="Image URL (https://example.com/image.jpg)" 
+                required
+            >
 
-                <tr>
-                    <td><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"></td>
-                    <td>Smartphone X</td>
-                    <td>Electronics</td>
-                    <td>$800</td>
-                    <td>40</td>
-                </tr>
+            <input 
+                type="number" 
+                id="p-stock" 
+                placeholder="Stock Quantity"
+                required
+            >
 
-                <tr>
-                    <td><img src="https://images.unsplash.com/photo-1585386959984-a41552231658"></td>
-                    <td>Wireless Headphones</td>
-                    <td>Accessories</td>
-                    <td>$150</td>
-                    <td>60</td>
-                </tr>
+            <button type="submit">
+                Add Product
+            </button>
 
-                <tr>
-                    <td><img src="https://images.unsplash.com/photo-1518444028785-8fbcd101ebb9"></td>
-                    <td>Smart Watch</td>
-                    <td>Accessories</td>
-                    <td>$250</td>
-                    <td>35</td>
-                </tr>
+        </form>
 
-                <tr>
-                    <td><img src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e"></td>
-                    <td>Gaming Keyboard</td>
-                    <td>Electronics</td>
-                    <td>$120</td>
-                    <td>50</td>
-                </tr>
-
-                <tr>
-                    <td><img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3"></td>
-                    <td>Gaming Mouse</td>
-                    <td>Electronics</td>
-                    <td>$80</td>
-                    <td>45</td>
-                </tr>
-
-                <tr>
-                    <td><img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef"></td>
-                    <td>Bluetooth Speaker</td>
-                    <td>Accessories</td>
-                    <td>$95</td>
-                    <td>30</td>
-                </tr>
-
-                <tr>
-                    <td><img src="https://images.unsplash.com/photo-1519183071298-a2962be96a4b"></td>
-                    <td>Tablet</td>
-                    <td>Electronics</td>
-                    <td>$600</td>
-                    <td>22</td>
-                </tr>
-
-                <tr>
-                    <td><img src="https://images.unsplash.com/photo-1580910051074-3eb694886505"></td>
-                    <td>DSLR Camera</td>
-                    <td>Electronics</td>
-                    <td>$1400</td>
-                    <td>15</td>
-                </tr>
-
-                <tr>
-                    <td><img src="https://images.unsplash.com/photo-1606813909353-0e94a0c3f1b7"></td>
-                    <td>LED Monitor</td>
-                    <td>Electronics</td>
-                    <td>$300</td>
-                    <td>28</td>
-                </tr>
-
-                <tr>
-                    <td><img src="https://images.unsplash.com/photo-1606813909025-19d93d52a5c0"></td>
-                    <td>External Hard Drive</td>
-                    <td>Accessories</td>
-                    <td>$110</td>
-                    <td>55</td>
-                </tr>
-
-                <tr>
-                    <td><img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f"></td>
-                    <td>VR Headset</td>
-                    <td>Electronics</td>
-                    <td>$400</td>
-                    <td>12</td>
-                </tr>
-
-                <tr>
-                    <td><img src="https://images.unsplash.com/photo-1587614382346-4ecf3b42df3b"></td>
-                    <td>Power Bank</td>
-                    <td>Accessories</td>
-                    <td>$50</td>
-                    <td>70</td>
-                </tr>
-
-                <tr>
-                    <td><img src="https://images.unsplash.com/photo-1585079542156-2755d9c8a094"></td>
-                    <td>Office Chair</td>
-                    <td>Furniture</td>
-                    <td>$220</td>
-                    <td>18</td>
-                </tr>
-
-                <tr>
-                    <td><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e"></td>
-                    <td>Noise Cancelling Headphones</td>
-                    <td>Accessories</td>
-                    <td>$300</td>
-                    <td>26</td>
-                </tr>
-
-            </tbody>
-        </table>
+        <br>
+        <button href="../admin/dashboard.html" onclick="goBack()">← Back to Dashboard</button>
 
     </div>
-</div>
-<script src="js/api.js"></script>
-<script src="js/auth-guard.js"></script>
-<script src="js/products.js"></script>
+
+
+    <!-- CONFIG FILE (API_BASE_URL inside this) -->
+    <script src="../js/config.js"></script>
 
 
 </body>
