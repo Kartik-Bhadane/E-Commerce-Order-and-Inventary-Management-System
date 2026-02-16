@@ -5,21 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VisionMart - E-Commerce</title>
 
-  <link rel="stylesheet" href="css/home.css" />
   <link rel="stylesheet" href="css/navbar.css" />
-</head>
-<script src="js/utils.js"></script>
-<script src="js/navbar.js"></script>
+  <link rel="stylesheet" href="css/home.css" />
 
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    section {
+      scroll-margin-top: 100px;
+    }
+  </style>
+</head>
 
 <body>
 
 <!-- NAVIGATION BAR -->
 <nav class="navbar">
-<div class="logo-text">VisionMart</div>
+  <div class="logo-text">VisionMart</div>
 
   <ul class="nav-links">
     <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#team">Core Team</a></li>
     <li><a href="customer/customerdash.html">Shop</a></li>
     <li><a href="admin/dashboard.html" id="adminLink">Admin</a></li>
     <li><a href="login.html" id="loginLink">Login</a></li>
@@ -31,21 +40,37 @@
 <!-- HERO SECTION -->
 <section class="hero">
   <div class="hero-container">
+
     <div class="hero-text">
       <h1>E-Commerce Order & Inventory<br>Management System</h1>
       <p>
         Manage orders, products, inventory, categories, and reports —
         all in one secure dashboard.
       </p>
+      <a href="customer/customerdash.html" class="btn outline">
+        Browse Products
+      </a>
+    </di
+</section>
 
-      <div class="hero-buttons">
-        <a href="customer/dashboard.html" class="btn outline">Browse Products</a>
-      </div>
-    </div>
+<!-- ABOUT SECTION -->
+<section class="about" id="about">
+  <div class="about-container">
+    <h2>What is VisionMart?</h2>
+    <p>
+      VisionMart is a modern E-Commerce Order & Inventory Management System
+      designed to simplify business operations. It enables administrators to
+      manage products, categories, inventory, and sales efficiently.
+    </p>
+    <p>
+      Customers can browse products, add items to cart, and complete purchases
+      securely. The platform combines powerful dashboard controls with
+      real-time tracking and secure authentication.
+    </p>
   </div>
 </section>
 
-<!-- FEATURES -->
+<!-- FEATURES SECTION -->
 <section class="features">
   <h2>System Features</h2>
 
@@ -83,14 +108,81 @@
 
   </div>
 </section>
+<!-- TEAM SECTION -->
+<section class="team" id="team">
+  <h2>Meet Our Core Team</h2>
+
+  <div class="team-container">
+
+    <div class="team-card">
+      <h3>Kartik Bhadane</h3>
+      <p><strong>Role:</strong> Team Leader</p>
+      <p>
+        Led the overall project development, coordinated team tasks,
+        managed system architecture planning.
+      </p>
+    </div>
+
+    <div class="team-card">
+      <h3>Utkarsh Upadhyay</h3>
+      <p><strong>Role:</strong> Backend Core Developer</p>
+      <p>
+        Developed core backend logic including order processing,
+        product management APIs, inventory handling,
+        and business logic implementation.
+      </p>
+    </div>
+
+    <div class="team-card">
+      <h3>Vedant</h3>
+      <p><strong>Role:</strong> Backend Developer</p>
+      <p>
+        Assisted in backend module development, API integration,
+        server-side validations, and system performance optimization.
+      </p>
+    </div>
+
+    <div class="team-card">
+      <h3>Chetan</h3>
+      <p><strong>Role:</strong> Backend Authentication</p>
+      <p>
+        Implemented secure authentication and authorization using
+        JWT, role-based access control, login/register validation,
+        and protected routes configuration.
+      </p>
+    </div>
+
+    <div class="team-card">
+      <h3>Srushti Mehekar</h3>
+      <p><strong>Role:</strong> Database Developer</p>
+      <p>
+        Designed and structured the database schema, managed
+        relationships between entities, optimized queries,
+        and ensured data integrity and security.
+      </p>
+    </div>
+
+    <div class="team-card">
+      <h3>Nayan & Sumedh</h3>
+      <p><strong>Role:</strong> Frontend Developers</p>
+      <p>
+        Designed and developed responsive user interfaces,
+        implemented glass morphism design, improved user experience,
+        and ensured smooth interaction across devices.
+      </p>
+    </div>
+
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-container">
+
     <div class="footer-box">
       <h3>Quick Links</h3>
       <a href="index.html">Home</a>
-      <a href="customer/dashboard.html">Shop</a>
+      <a href="customer/customerdash.html">Shop</a>
       <a href="login.html">Login</a>
     </div>
 
@@ -101,10 +193,13 @@
       <p>Location: Maharashtra, India</p>
       <p>© 2026 VisionMart</p>
     </div>
+
   </div>
 </footer>
 
 <!-- JS -->
+<script src="js/utils.js"></script>
+<script src="js/navbar.js"></script>
 <script src="js/auth-guard.js"></script>
 <script src="js/products.js"></script>
 <script src="js/cart.js"></script>
@@ -113,8 +208,6 @@
 <script>
   toggleAuthLinks();
   toggleAdminLink();
-
-
 </script>
 
 </body>
