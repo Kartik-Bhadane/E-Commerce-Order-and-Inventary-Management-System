@@ -1,5 +1,7 @@
 package com.example.E_CommerceOrder.service.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.example.E_CommerceOrder.dto.CategoryRequestDto;
@@ -25,4 +27,35 @@ public class CategoryServiceImpl implements CategoryService {
 
         return categoryRepo.save(category);
     }
+    
+//    / ✅ VIEW ALL CATEGORIES
+    @Override
+    public List<Category> getAllCategories() {
+        return categoryRepo.findAll();
+    }
+
+    // ✅ UPDATE CATEGORY
+    @Override
+    public Category updateCategory(Integer id, CategoryRequestDto dto) {
+
+        Category category = categoryRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        category.setCategoryName(dto.getCategoryName());
+        category.setDescription(dto.getDescription());
+
+        return categoryRepo.save(category);
+    }
+
+    // ✅ DELETE CATEGORY
+    @Override
+    public void deleteCategory(Integer id) {
+
+        Category category = categoryRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        categoryRepo.delete(category);
+    }
+    
+    
 }

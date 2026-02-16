@@ -1,3 +1,5 @@
+
+
 // ================================
 // LOGIN
 // ================================
@@ -24,8 +26,7 @@ document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
             if (data.role === "ADMIN") {
                 window.location.href = "admin/dashboard.html";
             } else {
-            window.location.href = "customer/customerdash.html";
-
+                window.location.href = "customer/dashboard.html";
             }
         } else {
             alert("Invalid credentials");
@@ -44,19 +45,12 @@ document.getElementById("registerForm")?.addEventListener("submit", async (e) =>
     e.preventDefault();
 
     const user = {
-        name: document.getElementById("name").value.trim(),
+        fullName: document.getElementById("name").value.trim(),
         email: document.getElementById("email").value.trim(),
         password: document.getElementById("password").value.trim(),
-        role: "USER"
+        role: "CUSTOMER"
     };
-    orders.push(newOrder);
 
-    localStorage.setItem("orders", JSON.stringify(orders));
-
-    localStorage.removeItem("cart");
-
-    alert("Order placed successfully!");
-    window.location.href = "orders.html";
     try {
         const response = await fetch(`${API_BASE_URL}/auth/register`, {
             method: "POST",

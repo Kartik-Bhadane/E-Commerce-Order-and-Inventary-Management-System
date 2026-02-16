@@ -1,81 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add Product | VisionMart Admin</title>
 
-    <!-- ✅ Use Admin CSS (NOT customer.css) -->
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Products</title>
     <link rel="stylesheet" href="../css/admin.css">
+    <style>
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; border: 1px solid #ddd; }
+        img { width: 60px; height: 60px; object-fit: cover; }
+        .form-box { margin-bottom: 20px; }
+        input { padding: 6px; margin: 5px; }
+        button { padding: 6px 12px; cursor: pointer; }
+    </style>
 </head>
 <body>
-<div class="sidebar">
-    <h2>VISIONMART</h2>
-    <ul>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="inventory.html">Inventory</a></li>
-        <li class="active"><a href="products.html">Products</a></li>
-        <li><a href="categories.html">Categories</a></li>
-        <li ><a href="orders.html">Orders</a></li>
-        <li><a href="customers.html">Customers</a></li>
-        <li><a href="../index.html">Main Site</a></li>
-    </ul>
+
+<h2>Product Management</h2>
+
+
+ <!-- <div class="form-box">
+    <h3>Add Product</h3>
+    <input type="text" id="name" placeholder="Product Name">
+    <input type="number" id="price" placeholder="Price">
+    <input type="text" id="imageUrl" placeholder="Image URL">
+    <input type="number" id="stock" placeholder="Stock">
+    <button onclick="addProduct()">Add Product</button>
+</div>  -->
+
+<div class="form-box">
+    <h3>Add Product</h3>
+    <input type="text" id="name" placeholder="Product Name">
+    <input type="number" id="price" placeholder="Price">
+    <input type="text" id="imageUrl" placeholder="Image URL">
+    <input type="number" id="stock" placeholder="Stock">
+    <input type="number" id="categoryId" placeholder="Category ID"> 
+    <button onclick="addProduct()">Add Product</button>
 </div>
 
-    <div class="admin-container">
-
-        <h2>Add New Product</h2>
-
-        <form id="product-form" class="admin-form">
-
-            <input 
-                type="text" 
-                id="p-name" 
-                placeholder="Product Name" 
-                required
-            >
-
-            <input 
-                type="number" 
-                id="p-price" 
-                placeholder="Price (₹)" 
-                required
-            >
-
-            <textarea 
-                id="p-desc" 
-                placeholder="Product Description"
-                required
-            ></textarea>
-
-            <input 
-                type="text" 
-                id="p-img" 
-                placeholder="Image URL (https://example.com/image.jpg)" 
-                required
-            >
-
-            <input 
-                type="number" 
-                id="p-stock" 
-                placeholder="Stock Quantity"
-                required
-            >
-
-            <button type="submit">
-                Add Product
-            </button>
-
-        </form>
-
-        <br>
-        <button href="../admin/dashboard.html" onclick="goBack()">← Back to Dashboard</button>
-
-    </div>
 
 
-    <!-- CONFIG FILE (API_BASE_URL inside this) -->
-    <script src="../js/config.js"></script>
-
+ <table>
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody id="productsTable"></tbody>
+</table>
+<script src="../js/api.js"></script>
+<script src="../js/auth-guard.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/admin-products.js"></script>
 
 </body>
-</html>
+</html>  
+  
+<!-- new code -->
+
