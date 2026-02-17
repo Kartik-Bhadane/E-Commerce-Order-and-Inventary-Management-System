@@ -29,46 +29,43 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
-            // 🌐 CORS
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-
-            // ❌ CSRF OFF (JWT based)
             .csrf(csrf -> csrf.disable())
 
-            // 🔐 AUTHORIZATION RULES
             .authorizeHttpRequests(auth -> auth
                 // 🔓 PUBLIC
                 .requestMatchers(
                         "/api/auth/**",
-                        "/api/products/**",
                         "/swagger-ui/**",
                         "/v3/api-docs/**"
                 ).permitAll()
 
-                // 🔐 ROLE BASED
-                .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
-                .requestMatchers("/api/customer/**").hasAuthority("CUSTOMER")
+                // 👤 USER + ADMIN
+                .requestMatchers("/api/products/**")
+                    .hasAnyAuthority("USER", "ADMIN")
 
-                // 🔒 PROTECTED
-                .requestMatchers("/api/cart/**").authenticated()
-                .requestMatchers("/api/orders/**").authenticated()
+                // 🛒 CUSTOMER
+                .requestMatchers("/api/customer/**")
+                    .hasAuthority("USER")
+
+                // 👑 ADMIN
+                .requestMatchers("/api/admin/**")
+                    .hasAuthority("ADMIN")
 
                 // 🔒 EVERYTHING ELSE
                 .anyRequest().authenticated()
             )
 
-            // 🚫 STATELESS SESSION
             .sessionManagement(sess ->
                 sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
 
-            // 🔑 JWT FILTER
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
-    // 🌍 CORS CONFIG
+    // 🌍 CORS
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
@@ -93,7 +90,7 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", config);
         return source;
     }
-    
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

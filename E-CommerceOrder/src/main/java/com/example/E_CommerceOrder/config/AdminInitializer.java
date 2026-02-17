@@ -14,6 +14,7 @@ public class AdminInitializer {
 	@Autowired
     private UserRepo userRepository;
 
+	
     @Autowired
     private PasswordEncoder passwordEncoder;
 
