@@ -26,7 +26,7 @@ document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
             if (data.role === "ADMIN") {
                 window.location.href = "admin/dashboard.html";
             } else {
-                window.location.href = "customer/dashboard.html";
+               window.location.href = "customer/customerdash.html";
             }
         } else {
             alert("Invalid credentials");

@@ -2,16 +2,21 @@ package com.example.E_CommerceOrder.service;
 
 import java.util.List;
 
-import com.example.E_CommerceOrder.dto.OrderResponsedto;
-import com.example.E_CommerceOrder.dto.PlaceOrderRequestdto;
+import com.example.E_CommerceOrder.dto.AdminOrderResponsedto;
+import com.example.E_CommerceOrder.entity.Order;
 
 public interface OrderService {
 
-    OrderResponsedto placeOrder(PlaceOrderRequestdto dto);
+    // Customer places order from cart
+    Order placeOrder(String email);
 
-    OrderResponsedto cancelOrder(int orderId);
+    //  Customer views own orders
+    List<Order> getOrdersByCustomer(String email);
 
-    OrderResponsedto getOrderById(int orderId);
-
-    List<OrderResponsedto> getAllOrders();
+    //  Admin views all orders
+    List<Order> getAllOrders();
+    
+    List<AdminOrderResponsedto> getAllOrdersForAdmin();
+    
+    Order cancelOrderByAdmin(int orderId);
 }

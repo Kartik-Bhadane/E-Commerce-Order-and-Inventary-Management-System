@@ -1,3 +1,5 @@
+console.log("✅ orders.js loaded");
+
 // Helper to format currency
 const formatRupee = (num) => {
     return new Intl.NumberFormat('en-IN', {
@@ -7,54 +9,89 @@ const formatRupee = (num) => {
     }).format(num);
 };
 
-function loadOrders() {
-    const ordersList = document.getElementById('orders-list');
-    // Retrieve orders from localStorage
-    const orders = JSON.parse(localStorage.getItem('orderHistory')) || [];
+async function loadMyOrders() {
 
-    if (orders.length === 0) {
-        ordersList.innerHTML = `
-            <div class="empty-orders">
-                <p>You haven't placed any orders yet.</p>
-                <a href="dashboard.html">Start Shopping</a>
-            </div>`;
+    const orderList = document.getElementById("order-list");
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        alert("Please login again");
+        window.location.href = "../login.html";
         return;
     }
 
-    ordersList.innerHTML = '';
+    try {
+        const response = await fetch(`${API_BASE_URL}/customer/orders`, {
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        });
 
-    // Display orders (Latest first)
-    orders.reverse().forEach((order) => {
-        const orderCard = document.createElement('div');
-        orderCard.className = 'order-card';
-        
-        orderCard.innerHTML = `
-            <div class="order-meta">
-                <div>
-                    <span class="label">ORDER ID</span>
-                    <span class="value">#VM-${order.id}</span>
+        if (!response.ok) {
+            throw new Error("Failed to load orders");
+        }
+
+        const orders = await response.json();
+        console.log("📦 Orders:", orders);
+
+        orderList.innerHTML = "";
+
+        if (!orders || orders.length === 0) {
+            orderList.innerHTML = `
+                <div class="empty-orders">
+                    <p>You haven't placed any orders yet.</p>
+                    <a href="customerdash.html">Start Shopping</a>
                 </div>
-                <div>
-                    <span class="label">DATE</span>
-                    <span class="value">${order.date}</span>
+            `;
+            return;
+        }
+
+        // Latest orders first
+        orders.reverse().forEach(order => {
+
+            const itemsHtml = order.items.map(item => `
+                <div class="order-item-row">
+                    <span>${item.product.productName} (x${item.quantity})</span>
+                    <span>${formatRupee(item.price * item.quantity)}</span>
                 </div>
-                <div>
-                    <span class="status-badge ${order.status.toLowerCase()}">${order.status}</span>
-                </div>
-            </div>
-            <div class="order-items">
-                ${order.items.map(item => `
-                    <div class="order-item-row">
-                        <span>${item.name} (x${item.qty})</span>
-                        <span>${formatRupee(item.price * item.qty)}</span>
+            `).join("");
+
+            const orderCard = document.createElement("div");
+            orderCard.className = "order-card";
+
+            orderCard.innerHTML = `
+                <div class="order-meta">
+                    <div>
+                        <span class="label">ORDER ID</span>
+                        <span class="value">#VM-${order.orderId}</span>
                     </div>
-                `).join('')}
-            </div>
-            <div class="order-footer">
-                <span>Total Paid: <strong>${formatRupee(order.total)}</strong></span>
-                <span class="pay-method">Via ${order.paymentMethod}</span>
-            </div>
-        `;
-        ordersList.appendChild(orderCard);
-    });
+                    <div>
+                        <span class="label">DATE</span>
+                        <span class="value">
+                            ${new Date(order.orderDate).toLocaleString()}
+                        </span>
+                    </div>
+                    <div>
+                        <span class="status-badge ${order.status.toLowerCase()}">
+                            ${order.status}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="order-items">
+                    ${itemsHtml}
+                </div>
+
+                <div class="order-footer">
+                    <strong>Total Paid: ${formatRupee(order.totalAmount)}</strong>
+                </div>
+            `;
+
+            orderList.appendChild(orderCard);
+        });
+
+    } catch (err) {
+        console.error("❌ Error loading orders:", err);
+        orderList.innerHTML = "<p>❌ Failed to load orders</p>";
+    }
 }

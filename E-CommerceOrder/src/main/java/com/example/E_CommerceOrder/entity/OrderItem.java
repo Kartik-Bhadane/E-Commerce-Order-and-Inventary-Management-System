@@ -10,19 +10,15 @@ public class OrderItem {
     private int orderItemId;
 
     private Integer quantity;
-
     private Double price;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
+    // getters & setters
     public int getOrderItemId() {
         return orderItemId;
-    }
-
-    public void setOrderItemId(int orderItemId) {
-        this.orderItemId = orderItemId;
     }
 
     public Integer getQuantity() {

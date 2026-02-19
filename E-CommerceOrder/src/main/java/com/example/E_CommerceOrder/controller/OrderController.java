@@ -2,10 +2,10 @@ package com.example.E_CommerceOrder.controller;
 
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.E_CommerceOrder.dto.OrderResponsedto;
-import com.example.E_CommerceOrder.dto.PlaceOrderRequestdto;
+import com.example.E_CommerceOrder.entity.Order;
 import com.example.E_CommerceOrder.service.OrderService;
 
 @RestController
@@ -18,23 +18,15 @@ public class OrderController {
         this.orderService = orderService;
     }
 
+    // 🛒 PLACE ORDER (FROM CART)
     @PostMapping("/place")
-    public OrderResponsedto placeOrder(@RequestBody PlaceOrderRequestdto dto) {
-        return orderService.placeOrder(dto);
+    public Order placeOrder(Authentication authentication) {
+        return orderService.placeOrder(authentication.getName());
     }
 
-    @PutMapping("/cancel/{orderId}")
-    public OrderResponsedto cancelOrder(@PathVariable int orderId) {
-        return orderService.cancelOrder(orderId);
-    }
-
-    @GetMapping("/{orderId}")
-    public OrderResponsedto getOrder(@PathVariable int orderId) {
-        return orderService.getOrderById(orderId);
-    }
-
+    // 👤 CUSTOMER – VIEW OWN ORDERS
     @GetMapping
-    public List<OrderResponsedto> getAllOrders() {
-        return orderService.getAllOrders();
+    public List<Order> myOrders(Authentication authentication) {
+        return orderService.getOrdersByCustomer(authentication.getName());
     }
 }

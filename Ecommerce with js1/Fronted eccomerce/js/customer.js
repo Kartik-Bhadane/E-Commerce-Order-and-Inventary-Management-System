@@ -1,23 +1,30 @@
-const API_BASE_URL = "http://localhost:8080/api";
+// ================================
+// CUSTOMER.JS
+// ================================
+
 console.log("✅ customer.js loaded");
 
-function loadProducts() {
+// 🔹 Load products when page loads
+window.onload = loadProducts;
 
+function loadProducts() {
   const productList = document.getElementById("product-list");
 
   if (!productList) {
-    console.error("❌ product-list not found");
+    console.error("❌ product-list not found in HTML");
     return;
   }
 
   fetch(`${API_BASE_URL}/products`)
     .then(res => {
-      if (!res.ok) throw new Error("Failed to fetch products");
+      if (!res.ok) {
+        throw new Error("Failed to fetch products");
+      }
       return res.json();
     })
     .then(products => {
-
       console.log("📦 Products:", products);
+
       productList.innerHTML = "";
 
       if (!products || products.length === 0) {
@@ -26,13 +33,27 @@ function loadProducts() {
       }
 
       products.forEach(p => {
+        const stock = p.inventory
+          ? p.inventory.quantityAvailable
+          : 0;
 
         productList.innerHTML += `
           <div class="product-card">
             <h3>${p.productName}</h3>
-            <p>₹${p.price}</p>
-            <p>Stock: ${p.inventory ? p.inventory.quantityAvailable : 0}</p>
-            <button onclick="addToCart(${p.productId})">
+            <p><strong>Price:</strong> ₹${p.price}</p>
+            <p><strong>Stock:</strong> ${stock}</p>
+
+            <label for="qty-${p.productId}">Quantity:</label>
+            <input
+              type="number"
+              id="qty-${p.productId}"
+              min="1"
+              max="${stock}"
+              value="1"
+            />
+
+            <button onclick="addToCart(${p.productId})"
+              ${stock === 0 ? "disabled" : ""}>
               Add to Cart
             </button>
           </div>
@@ -40,17 +61,28 @@ function loadProducts() {
       });
     })
     .catch(err => {
-      console.error(err);
-      productList.innerHTML = "<p>Failed to load products</p>";
+      console.error("❌ Error loading products:", err);
+      productList.innerHTML =
+        "<p>❌ Failed to load products</p>";
     });
 }
 
+// 🔹 Add product to cart
 function addToCart(productId) {
-
   const token = localStorage.getItem("token");
 
   if (!token) {
     alert("Please login first");
+    window.location.href = "../login.html";
+    return;
+  }
+
+  const qtyInput =
+    document.getElementById(`qty-${productId}`);
+  const quantity = Number(qtyInput.value);
+
+  if (!quantity || quantity <= 0) {
+    alert("Invalid quantity");
     return;
   }
 
@@ -62,20 +94,20 @@ function addToCart(productId) {
     },
     body: JSON.stringify({
       productId: productId,
-      quantity: 1
+      quantity: quantity
     })
   })
-  .then(res => {
-    if (!res.ok) throw new Error("Add failed");
-    return res.json();
-  })
-  .then(() => {
-    alert("✅ Product added to cart");
-  })
-  .catch(err => {
-    console.error(err);
-    alert("❌ Failed to add to cart");
-  });
+    .then(res => {
+      if (!res.ok) {
+        throw new Error("Add to cart failed");
+      }
+      return res.json();
+    })
+    .then(() => {
+      alert("✅ Product added to cart");
+    })
+    .catch(err => {
+      console.error("❌ Add to cart error:", err);
+      alert("❌ Failed to add product to cart");
+    });
 }
-
-window.onload = loadProducts;

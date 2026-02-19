@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.E_CommerceOrder.dto.*;
+import com.example.E_CommerceOrder.dto.AdminOrderResponsedto;
 import com.example.E_CommerceOrder.entity.*;
 import com.example.E_CommerceOrder.repository.*;
 import com.example.E_CommerceOrder.service.OrderService;
@@ -16,45 +16,25 @@ public class OrderServiceImpl implements OrderService {
 
     private final OrderRepo orderRepo;
     private final UserRepo userRepo;
-    private final ProductRepo productRepo;
+    private final CartRepo cartRepo;
 
     public OrderServiceImpl(OrderRepo orderRepo,
                             UserRepo userRepo,
-                            ProductRepo productRepo) {
+                            CartRepo cartRepo) {
         this.orderRepo = orderRepo;
         this.userRepo = userRepo;
-        this.productRepo = productRepo;
+        this.cartRepo = cartRepo;
     }
 
-   
-    private OrderResponsedto mapToDto(Order order) {
-
-        OrderResponsedto dto = new OrderResponsedto();
-        dto.setOrderId(order.getOrderId());
-        dto.setOrderDate(order.getOrderDate());
-        dto.setStatus(order.getStatus());
-        dto.setTotalAmount(order.getTotalAmount());
-
-        List<OrderItemResponsedto> itemDtos = new ArrayList<>();
-
-        for (OrderItem item : order.getItems()) {
-            itemDtos.add(new OrderItemResponsedto(
-                    item.getProduct().getProductId(),
-                    item.getProduct().getProductName(),
-                    item.getPrice(),
-                    item.getQuantity()
-            ));
-        }
-
-        dto.setItems(itemDtos);
-        return dto;
-    }
-
+    // 🛒 PLACE ORDER
     @Override
-    public OrderResponsedto placeOrder(PlaceOrderRequestdto dto) {
+    public Order placeOrder(String email) {
 
-        User user = userRepo.findById(dto.getUserId())
+        User user = userRepo.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Cart cart = cartRepo.findByUser(user)
+                .orElseThrow(() -> new RuntimeException("Cart is empty"));
 
         Order order = new Order();
         order.setUser(user);
@@ -64,38 +44,64 @@ public class OrderServiceImpl implements OrderService {
         List<OrderItem> orderItems = new ArrayList<>();
         double totalAmount = 0;
 
-        for (OrderItemRequestdto itemDto : dto.getItems()) {
-
-            Product product = productRepo.findById(itemDto.getProductId())
-                    .orElseThrow(() -> new RuntimeException("Product not found"));
-
-            Inventory inventory = product.getInventory();
-
-            if (inventory.getQuantityAvailable() < itemDto.getQuantity()) {
-                throw new RuntimeException("Out of stock");
-            }
-
-            inventory.setQuantityAvailable(
-                    inventory.getQuantityAvailable() - itemDto.getQuantity()
-            );
+        for (CartItem cartItem : cart.getItems()) {
 
             OrderItem orderItem = new OrderItem();
-            orderItem.setProduct(product);
-            orderItem.setQuantity(itemDto.getQuantity());
-            orderItem.setPrice(product.getPrice());
+            orderItem.setProduct(cartItem.getProduct());
+            orderItem.setPrice(cartItem.getProduct().getPrice());
+            orderItem.setQuantity(cartItem.getQuantity());
 
-            totalAmount += product.getPrice() * itemDto.getQuantity();
+            totalAmount += orderItem.getPrice() * orderItem.getQuantity();
             orderItems.add(orderItem);
         }
 
         order.setItems(orderItems);
         order.setTotalAmount(totalAmount);
 
-        return mapToDto(orderRepo.save(order));
+        Order savedOrder = orderRepo.save(order);
+        cartRepo.delete(cart);
+
+        return savedOrder;
     }
 
+    // 👤 CUSTOMER
     @Override
-    public OrderResponsedto cancelOrder(int orderId) {
+    public List<Order> getOrdersByCustomer(String email) {
+
+        User user = userRepo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return orderRepo.findAll().stream()
+                .filter(o -> o.getUser().getUserId() == user.getUserId())
+                .toList();
+    }
+
+    // 👑 ADMIN – RAW
+    @Override
+    public List<Order> getAllOrders() {
+        return orderRepo.findAll();
+    }
+
+    // 👑 ADMIN – DTO
+    @Override
+    public List<AdminOrderResponsedto> getAllOrdersForAdmin() {
+
+        return orderRepo.findAll().stream().map(order -> {
+            AdminOrderResponsedto dto = new AdminOrderResponsedto();
+
+            dto.setOrderId(order.getOrderId());
+            dto.setOrderDate(order.getOrderDate());
+            dto.setStatus(order.getStatus());
+            dto.setTotalAmount(order.getTotalAmount());
+            dto.setCustomerEmail(order.getUser().getEmail());
+
+            return dto;
+        }).toList();
+    }
+    
+    
+    @Override
+    public Order cancelOrderByAdmin(int orderId) {
 
         Order order = orderRepo.findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
@@ -104,30 +110,7 @@ public class OrderServiceImpl implements OrderService {
             throw new RuntimeException("Order already cancelled");
         }
 
-        for (OrderItem item : order.getItems()) {
-            Inventory inventory = item.getProduct().getInventory();
-            inventory.setQuantityAvailable(
-                    inventory.getQuantityAvailable() + item.getQuantity()
-            );
-        }
-
         order.setStatus("CANCELLED");
-        return mapToDto(orderRepo.save(order));
-    }
-
-    @Override
-    public OrderResponsedto getOrderById(int orderId) {
-        return mapToDto(orderRepo.findById(orderId)
-                .orElseThrow(() -> new RuntimeException("Order not found")));
-    }
-
-    @Override
-    public List<OrderResponsedto> getAllOrders() {
-
-        List<OrderResponsedto> response = new ArrayList<>();
-        for (Order order : orderRepo.findAll()) {
-            response.add(mapToDto(order));
-        }
-        return response;
+        return orderRepo.save(order); // ✅ SAVE TO DB
     }
 }

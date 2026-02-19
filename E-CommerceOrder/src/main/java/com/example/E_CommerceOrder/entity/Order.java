@@ -26,10 +26,12 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
-    // 🔥 UNIDIRECTIONAL
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id") // FK in order_item table
-    private List<OrderItem> items;
+    @OneToMany(
+    	    cascade = CascadeType.ALL,
+    	    orphanRemoval = true
+    	)
+    	@JoinColumn(name = "order_id")
+    	private List<OrderItem> items;
 
     public int getOrderId() {
         return orderId;

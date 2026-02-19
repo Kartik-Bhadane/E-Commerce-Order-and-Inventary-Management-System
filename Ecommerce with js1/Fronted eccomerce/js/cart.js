@@ -1,3 +1,4 @@
+console.log("API_BASE_URL =", API_BASE_URL);
 const formatRupee = (num) => {
     return new Intl.NumberFormat('en-IN', {
         style: 'currency',

@@ -2,16 +2,8 @@ package com.example.E_CommerceOrder.dto;
 
 public class AddToCartRequestdto {
 
-    private int userId;
     private int productId;
     private int quantity;
-
-    public int getUserId() {
-        return userId;
-    }
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 
     public int getProductId() {
         return productId;

@@ -34,21 +34,21 @@ public class JwtFilter extends OncePerRequestFilter {
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
 
             String token = authHeader.substring(7);
-            String username = jwtUtil.extractUsername(token);
+            String email = jwtUtil.extractUsername(token);
+            String role = jwtUtil.extractRole(token); // CUSTOMER / ADMIN
 
-            if (username != null &&
+            if (email != null &&
                 SecurityContextHolder.getContext().getAuthentication() == null) {
 
-                // 🔥 NORMALIZE ROLE (CRITICAL FIX)
-                String role = jwtUtil.extractRole(token).toUpperCase();
+                String authority = "ROLE_" + role.toUpperCase();
 
-                System.out.println("🔥 ROLE FROM JWT = [" + role + "]");
+                System.out.println("🔥 AUTHORITY SET = " + authority);
 
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(
-                                username,
+                                email,
                                 null,
-                                List.of(new SimpleGrantedAuthority(role))
+                                List.of(new SimpleGrantedAuthority(authority))
                         );
 
                 authentication.setDetails(

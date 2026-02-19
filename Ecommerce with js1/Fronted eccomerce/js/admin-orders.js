@@ -1,6 +1,5 @@
-// ============================
-// LOAD ORDERS
-// ============================
+console.log("✅ admin-orders.js loaded");
+
 async function loadOrders() {
     try {
         const response = await fetch(`${API_BASE_URL}/admin/orders`, {
@@ -9,73 +8,56 @@ async function loadOrders() {
             }
         });
 
+        if (!response.ok) {
+            throw new Error("Failed to load orders");
+        }
+
         const orders = await response.json();
+        console.log("📦 Admin Orders:", orders);
+
         const table = document.getElementById("orderTable");
         table.innerHTML = "";
 
         orders.forEach(order => {
 
             let statusClass = "instock";
-
             if (order.status === "PENDING") statusClass = "lowstock";
             if (order.status === "CANCELLED") statusClass = "outstock";
 
             table.innerHTML += `
                 <tr>
-                    <td>#${order.id}</td>
-                    <td>${order.customerName}</td>
-                    <td>${new Date(order.date).toLocaleDateString()}</td>
-                    <td>$${order.totalAmount}</td>
+                    <td>#VM-${order.orderId}</td>
+                    <td>${order.user?.email || "N/A"}</td>
+                    <td>${new Date(order.orderDate).toLocaleString()}</td>
+                    <td>₹${order.totalAmount}</td>
                     <td>
                         <span class="status ${statusClass}">
                             ${order.status}
                         </span>
                     </td>
                     <td>
-                        <button onclick="updateStatus(${order.id})">Update</button>
-                        <button onclick="cancelOrder(${order.id})">Cancel</button>
+                        <button onclick="cancelOrder(${order.orderId})">
+                            Cancel
+                        </button>
                     </td>
                 </tr>
             `;
         });
 
     } catch (error) {
-        console.error("Order load error:", error);
-        alert("Failed to load orders.");
+        console.error("❌ Admin order load error:", error);
+        alert("Failed to load orders");
     }
 }
 
-
 // ============================
-// UPDATE STATUS
+// CANCEL ORDER (ADMIN)
 // ============================
-async function updateStatus(id) {
-
-    const status = prompt("Enter status (PENDING, COMPLETED, CANCELLED):");
-
-    if (!status) return;
-
-    await fetch(`${API_BASE_URL}/admin/orders/${id}/status`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + localStorage.getItem("token")
-        },
-        body: JSON.stringify({ status })
-    });
-
-    loadOrders();
-}
-
-
-// ============================
-// CANCEL ORDER
-// ============================
-async function cancelOrder(id) {
+async function cancelOrder(orderId) {
 
     if (!confirm("Cancel this order?")) return;
 
-    await fetch(`${API_BASE_URL}/admin/orders/${id}/cancel`, {
+    await fetch(`${API_BASE_URL}/admin/orders/${orderId}/cancel`, {
         method: "PUT",
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
@@ -83,12 +65,4 @@ async function cancelOrder(id) {
     });
 
     loadOrders();
-}
-
-
-// ============================
-// EXPORT ORDERS
-// ============================
-function exportOrders() {
-    window.open(`${API_BASE_URL}/admin/orders/export`, "_blank");
 }

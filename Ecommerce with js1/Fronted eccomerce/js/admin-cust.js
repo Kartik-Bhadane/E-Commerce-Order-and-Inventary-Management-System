@@ -1,41 +1,36 @@
-requireLogin();
+console.log("✅ admin-cust.js loaded");
 
 async function loadCustomers() {
     try {
-        const response = await fetch(`${API_BASE_URL}/orders`, {
+        const response = await fetch(`${API_BASE_URL}/admin/customers`, {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
             }
         });
 
-        const orders = await response.json();
-        const table = document.getElementById("customerTable");
+        if (!response.ok) {
+            throw new Error("Failed to load customers");
+        }
 
+        const customers = await response.json();
+        console.log("📦 Customers:", customers);
+
+        const table = document.getElementById("customerTable");
         table.innerHTML = "";
 
-        orders.forEach(order => {
-
-            let productList = "";
-
-            if (order.items && order.items.length > 0) {
-                order.items.forEach(item => {
-                    productList += `${item.product.name} (Qty: ${item.quantity})<br>`;
-                });
-            } else {
-                productList = "No products";
-            }
-
+        customers.forEach(c => {
             table.innerHTML += `
                 <tr>
-                    <td>${order.customer?.name || "N/A"}</td>
-                    <td>${order.customer?.email || "N/A"}</td>
-                    <td>${productList}</td>
+                    <td>${c.name || "N/A"}</td>
+                    <td>${c.email}</td>
+                    <td>${c.role}</td>
                 </tr>
             `;
         });
 
-    } catch (error) {
-        console.error("Error loading customers:", error);
+    } catch (err) {
+        console.error("❌ Error loading customers:", err);
+        alert("Failed to load customers");
     }
 }
 
