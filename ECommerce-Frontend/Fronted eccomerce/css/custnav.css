@@ -1,0 +1,175 @@
+/* =========================
+   GOOGLE FONT
+========================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+
+/* =========================
+   GLOBAL RESET
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
+    color: white;
+}
+
+/* =========================
+   NAVBAR (TALLER + CLEAN)
+========================= */
+.navbar {
+    height: 80px;                 /* Increased height */
+    padding: 0 50px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* =========================
+   BIG BRAND LOGO
+========================= */
+.logo,
+.nav-brand,
+.logo-text {
+    display: flex;
+    align-items: center;
+    height: 60px;
+}
+
+.logo h2,
+.nav-brand,
+.logo-text {
+    font-size: 28px;        /* Bigger Name */
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin: 0;
+
+    background: linear-gradient(90deg, #38bdf8, #0ea5e9);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* =========================
+   NAV LINKS
+========================= */
+.nav-links {
+    display: flex;
+    align-items: center;
+    height: 80px;
+}
+
+.nav-links a {
+    color: #cbd5e1;
+    margin-left: 25px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.3s ease;
+    position: relative;
+}
+
+/* Underline animation */
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0%;
+    height: 2px;
+    background: #38bdf8;
+    transition: 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links .active::after {
+    width: 100%;
+}
+
+.nav-links a:hover,
+.nav-links .active {
+    color: #38bdf8;
+}
+
+/* =========================
+   SEARCH BOX
+========================= */
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 80px;
+}
+
+.search-box input {
+    width: 260px;
+    height: 40px;
+    padding: 0 15px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: #1e293b;
+    color: white;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.search-box input:focus {
+    background: #243146;
+}
+
+.search-box button {
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 8px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.search-box button:hover {
+    background: #1d4ed8;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 900px) {
+
+    .navbar {
+        height: 70px;
+        padding: 0 20px;
+    }
+
+    .logo,
+    .nav-brand,
+    .logo-text {
+        height: 70px;
+    }
+
+    .nav-links {
+        height: 70px;
+    }
+
+    .search-box {
+        display: none;
+    }
+
+    .nav-links a {
+        margin-left: 15px;
+        font-size: 14px;
+    }
+}

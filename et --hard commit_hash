@@ -1,0 +1,27 @@
+[33mbfda071[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: reset: moving to ORIG_HEAD
+[33mbfda071[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{1}: pull: Fast-forward
+[33md3e3b4d[m HEAD@{2}: reset: moving to HEAD
+[33md3e3b4d[m HEAD@{3}: commit: frontnd and backend update
+[33mc137527[m HEAD@{4}: pull: Fast-forward
+[33m2701ce6[m HEAD@{5}: reset: moving to HEAD
+[33m2701ce6[m HEAD@{6}: commit: footer Change
+[33m6e1439a[m HEAD@{7}: commit: Home Page Change
+[33m89b7b1e[m HEAD@{8}: commit: small change frontend
+[33me444f43[m HEAD@{9}: commit: frontend updated
+[33m4f9d1e8[m HEAD@{10}: reset: moving to HEAD
+[33m4f9d1e8[m HEAD@{11}: reset: moving to HEAD
+[33m4f9d1e8[m HEAD@{12}: reset: moving to HEAD
+[33m4f9d1e8[m HEAD@{13}: reset: moving to HEAD
+[33m4f9d1e8[m HEAD@{14}: reset: moving to HEAD
+[33m4f9d1e8[m HEAD@{15}: reset: moving to HEAD
+[33m4f9d1e8[m HEAD@{16}: reset: moving to HEAD
+[33m4f9d1e8[m HEAD@{17}: commit: frontend add
+[33m9f1518c[m HEAD@{18}: pull origin main: Fast-forward
+[33m8717eb8[m HEAD@{19}: reset: moving to HEAD
+[33m8717eb8[m HEAD@{20}: pull: Fast-forward
+[33m13c3180[m HEAD@{21}: pull: Fast-forward
+[33me5b7134[m HEAD@{22}: commit: Repository Updated
+[33mff34863[m HEAD@{23}: commit: Entity Upadated
+[33m4853d49[m HEAD@{24}: commit: Structure
+[33m05fa439[m HEAD@{25}: commit: Structure
+[33mb59e662[m HEAD@{26}: clone: from https://github.com/Kartik-Bhadane/E-Commerce-Order-and-Inventary-Management-System.git
