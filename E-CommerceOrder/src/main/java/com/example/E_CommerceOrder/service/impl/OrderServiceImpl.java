@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.E_CommerceOrder.dto.AdminOrderResponsedto;
+import com.example.E_CommerceOrder.dto.DashboardDTO;
 import com.example.E_CommerceOrder.entity.*;
 import com.example.E_CommerceOrder.repository.*;
 import com.example.E_CommerceOrder.service.OrderService;
@@ -113,4 +114,10 @@ public class OrderServiceImpl implements OrderService {
         order.setStatus("CANCELLED");
         return orderRepo.save(order); // ✅ SAVE TO DB
     }
+
+	@Override
+	public DashboardDTO getDashboardStats() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
