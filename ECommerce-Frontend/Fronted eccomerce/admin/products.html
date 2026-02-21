@@ -9,7 +9,7 @@
 </head>
 <body>
 
-
+<!-- SIDEBAR -->
 <div class="sidebar">
     <h2>VISIONMART</h2>
  <ul>
@@ -52,6 +52,7 @@
 
 </div>
 
+<!-- MAIN -->
 <div class="main">
 
     <!-- TOPBAR -->
@@ -62,16 +63,18 @@
 
     <div class="page-content">
 
+        <!-- ADD PRODUCT FORM -->
         <div class="form-box">
             <input type="text" id="name" placeholder="Product Name">
             <input type="number" id="price" placeholder="Price">
             <input type="text" id="imageUrl" placeholder="Image URL">
+             <input type="text" id="description" placeholder="Description">
             <input type="number" id="stock" placeholder="Stock">
             <input type="number" id="categoryId" placeholder="Category ID">
-            <button onclick="addProduct()">Add Product</button>
+            <button class="primary-btn" onclick="addProduct()">Add Product</button>
         </div>
 
-    
+        <!-- PRODUCTS TABLE -->
         <table>
             <thead>
                 <tr>
@@ -88,7 +91,7 @@
     </div>
 </div>
 
-
+<!-- JS -->
 <script src="../js/admin-products.js"></script>
 <script src="../js/config.js"></script>
 <script src="../js/auth-guard.js"></script>
