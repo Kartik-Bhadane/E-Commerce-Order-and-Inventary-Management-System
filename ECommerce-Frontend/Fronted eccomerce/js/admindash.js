@@ -62,11 +62,11 @@ async function loadDashboard() {
     // Remove token
     localStorage.removeItem("token");
 
-    // Optional: remove user info if stored
+
     localStorage.removeItem("role");
     localStorage.removeItem("email");
 
-    // Redirect to login page
+  
     window.location.href = "../login.html";
 }
 

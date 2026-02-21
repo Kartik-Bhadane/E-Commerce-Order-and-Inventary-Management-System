@@ -1,6 +1,4 @@
-/* ============================= */
-/* GLOBAL */
-/* ============================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -13,10 +11,6 @@ body {
     background: linear-gradient(135deg, #0f172a, #1e293b, #0f172a);
     color: white;
 }
-
-/* ============================= */
-/* SEARCH */
-/* ============================= */
 
 .search-box input {
     padding: 8px 12px;
@@ -38,9 +32,7 @@ body {
     font-size: 13px;
 }
 
-/* ============================= */
-/* CONTAINER */
-/* ============================= */
+
 
 .container {
     max-width: 1100px;
@@ -59,19 +51,11 @@ body {
     font-size: 14px;
 }
 
-/* ============================= */
-/* PRODUCT GRID */
-/* ============================= */
-
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
 }
-
-/* ============================= */
-/* PRODUCT CARD */
-/* ============================= */
 
 .product-card {
     background: rgba(255,255,255,0.05);
@@ -109,9 +93,6 @@ body {
     margin: 8px 0;
 }
 
-/* ============================= */
-/* QUANTITY INPUT */
-/* ============================= */
 
 .product-card input {
     width: 70px;
@@ -122,10 +103,6 @@ body {
     text-align: center;
     font-size: 13px;
 }
-
-/* ============================= */
-/* BUTTON */
-/* ============================= */
 
 .product-card button {
     width: 100%;
@@ -142,10 +119,6 @@ body {
 .product-card button:hover {
     transform: scale(1.05);
 }
-
-/* ============================= */
-/* RESPONSIVE */
-/* ============================= */
 
 @media (max-width: 768px) {
     .navbar {

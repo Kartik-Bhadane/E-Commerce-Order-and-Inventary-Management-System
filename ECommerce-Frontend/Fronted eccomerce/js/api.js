@@ -1,6 +1,3 @@
-// ================================
-// COMMON API REQUEST
-// ================================
 async function apiRequest(endpoint, method = "GET", body = null, auth = false) {
 
     const headers = {

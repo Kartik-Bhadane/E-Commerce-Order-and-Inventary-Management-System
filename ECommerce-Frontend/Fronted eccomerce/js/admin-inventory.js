@@ -1,6 +1,3 @@
-// ==========================
-// LOAD INVENTORY
-// ==========================
 async function loadInventory() {
     try {
         const response = await fetch(`${API_BASE_URL}/admin/products`, {
@@ -72,10 +69,6 @@ async function loadInventory() {
     }
 }
 
-
-// ==========================
-// ADD PRODUCT
-// ==========================
 async function addProduct() {
     const name = prompt("Product name:");
     const price = prompt("Price:");
@@ -100,9 +93,7 @@ async function addProduct() {
 }
 
 
-// ==========================
-// EDIT PRODUCT
-// ==========================
+
 async function editProduct(id) {
     const quantity = prompt("Enter new quantity:");
 
@@ -123,9 +114,7 @@ async function editProduct(id) {
 }
 
 
-// ==========================
-// DELETE PRODUCT
-// ==========================
+
 async function deleteProduct(id) {
     if (!confirm("Delete this product?")) return;
 

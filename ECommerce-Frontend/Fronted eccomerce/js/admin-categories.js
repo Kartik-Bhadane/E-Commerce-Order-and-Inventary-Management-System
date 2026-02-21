@@ -5,9 +5,7 @@ function getAuthHeaders() {
   };
 }
 
-// =============================
-// LOAD CATEGORIES
-// =============================
+
 async function loadCategories() {
   try {
     const response = await fetch(`${API_BASE_URL}/admin/categories`, {
@@ -59,9 +57,6 @@ async function loadCategories() {
   }
 }
 
-// =============================
-// ADD CATEGORY
-// =============================
 async function addCategory() {
   const categoryName = prompt("Enter category name:");
   if (!categoryName) return;
@@ -91,9 +86,6 @@ async function addCategory() {
   }
 }
 
-// =============================
-// UPDATE CATEGORY
-// =============================
 async function editCategory(id) {
   if (!id) return alert("Invalid category ID");
 
@@ -125,9 +117,7 @@ async function editCategory(id) {
   }
 }
 
-// =============================
-// DELETE CATEGORY
-// =============================
+
 async function deleteCategory(id) {
   if (!id) return alert("Invalid category ID");
   if (!confirm("Are you sure you want to delete this category?")) return;
@@ -150,5 +140,5 @@ async function deleteCategory(id) {
   }
 }
 
-// Load categories on page load
+
 document.addEventListener("DOMContentLoaded", loadCategories);

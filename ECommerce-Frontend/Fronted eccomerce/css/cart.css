@@ -41,9 +41,8 @@ body {
 .clear-cart-btn:active {
     transform: scale(0.95);
 }
-/* ============================= */
 /* CONTAINER */
-/* ============================= */
+
 
 .container {
   max-width: 1200px;
@@ -51,9 +50,8 @@ body {
   padding: 0 20px;
 }
 
-/* ============================= */
+
 /* HEADER */
-/* ============================= */
 
 .cart-header {
   display: flex;
@@ -74,9 +72,7 @@ body {
   font-weight: 600;
 }
 
-/* ============================= */
 /* LAYOUT */
-/* ============================= */
 
 .cart-wrapper {
   display: flex;
@@ -84,9 +80,8 @@ body {
   align-items: flex-start;
 }
 
-/* ============================= */
 /* CART ITEMS */
-/* ============================= */
+
 
 .items-container {
   flex: 2;
@@ -98,7 +93,7 @@ body {
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* Individual Item */
+
 
 .cart-item {
   display: flex;
@@ -165,9 +160,8 @@ body {
   text-decoration: underline;
 }
 
-/* ============================= */
-/* SUMMARY CARD */
-/* ============================= */
+
+
 
 .summary-card {
   flex: 1;
@@ -208,9 +202,9 @@ body {
   margin: 15px 0;
 }
 
-/* ============================= */
+
 /* PAYMENT */
-/* ============================= */
+
 
 .checkout-section label {
   font-size: 14px;
@@ -243,9 +237,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* ============================= */
-/* RESPONSIVE */
-/* ============================= */
 
 @media (max-width: 900px) {
   .cart-wrapper {

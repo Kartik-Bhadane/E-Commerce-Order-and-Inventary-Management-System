@@ -34,9 +34,9 @@ body {
     justify-content: space-between;
 }
 
-/* =========================
+/* 
    BIG BRAND LOGO
-========================= */
+ */
 .logo,
 .nav-brand,
 .logo-text {
@@ -59,9 +59,7 @@ body {
     -webkit-text-fill-color: transparent;
 }
 
-/* =========================
-   NAV LINKS
-========================= */
+
 .nav-links {
     display: flex;
     align-items: center;
@@ -100,9 +98,6 @@ body {
     color: #38bdf8;
 }
 
-/* =========================
-   SEARCH BOX
-========================= */
 .search-box {
     display: flex;
     align-items: center;
@@ -144,9 +139,6 @@ body {
     background: #1d4ed8;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
 @media (max-width: 900px) {
 
     .navbar {

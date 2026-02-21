@@ -1,6 +1,3 @@
-// ================================
-// TOKEN MANAGEMENT
-// ================================
 
 const TokenService = {
 
@@ -18,9 +15,6 @@ const TokenService = {
 };
 
 
-// ================================
-// USER STORAGE
-// ================================
 
 const UserService = {
 
@@ -38,18 +32,11 @@ const UserService = {
 };
 
 
-// ================================
-// PRICE FORMATTER (₹)
-// ================================
 
 function formatPrice(price) {
     return "₹" + Number(price).toLocaleString("en-IN");
 }
 
-
-// ================================
-// SIMPLE ALERT
-// ================================
 
 function showMessage(message, type = "success") {
 
@@ -79,18 +66,10 @@ function showMessage(message, type = "success") {
 }
 
 
-// ================================
-// REDIRECT HELPER
-// ================================
 
 function redirect(page) {
     window.location.href = page;
 }
-
-
-// ================================
-// CART COUNT UPDATE
-// ================================
 
 function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];

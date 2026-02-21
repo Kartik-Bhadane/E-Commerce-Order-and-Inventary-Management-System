@@ -105,14 +105,14 @@ async function clearCart() {
         });
 
       if (!response.ok) {
-    // If cart not found, treat as empty
+    
     document.getElementById("cart-list").innerHTML = "<h3>Your cart is empty</h3>";
     document.getElementById("subtotal-val").innerText = formatRupee(0);
     document.getElementById("total-val").innerText = formatRupee(0);
     document.getElementById("item-count-badge").innerText = "0 Items";
     return;
 }
-        // Immediately refresh UI
+
         window.location.reload();
 
     } catch (error) {
@@ -120,7 +120,6 @@ async function clearCart() {
         alert("❌ Failed to clear cart");
     }
 }
-// ================= PLACE ORDER =================
 
 async function placeOrder() {
 

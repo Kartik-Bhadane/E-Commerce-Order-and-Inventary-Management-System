@@ -1,4 +1,4 @@
-/* ================= GLOBAL ================= */
+
 
 * {
     margin: 0;
@@ -13,7 +13,6 @@ body {
     color: #e2e8f0;
 }
 
-/* ================= SIDEBAR ================= */
 
 .sidebar {
     width: 250px;
@@ -70,14 +69,11 @@ body {
     margin: 0 10px;
 }
 
-/* ================= MAIN ================= */
-
 .main {
     margin-left: 250px;
     width: 100%;
 }
 
-/* ================= TOPBAR ================= */
 
 .topbar {
     height: 70px;
@@ -108,13 +104,10 @@ body {
     opacity: 0.85;
 }
 
-/* ================= CONTENT ================= */
-
 .page-content {
     padding: 30px;
 }
 
-/* ================= CARDS ================= */
 
 .cards {
     display: grid;
@@ -146,7 +139,6 @@ body {
     font-weight: 700;
 }
 
-/* ================= TABLE ================= */
 
 table {
     width: 100%;
@@ -176,7 +168,7 @@ table tbody tr:hover {
     background: #263244;
 }
 
-/* ================= FORM ================= */
+/* ==FORM === */
 
 .form-box {
     background: #1e293b;
@@ -214,7 +206,7 @@ table tbody tr:hover {
     font-weight: 600;
 }
 
-/* ================= BUTTONS ================= */
+/* == BUTTONS == */
 
 .btn-edit {
     background: #2563eb;
@@ -233,7 +225,7 @@ table tbody tr:hover {
     border-radius: 5px;
     cursor: pointer;
 }
-/* ACTION BUTTONS */
+
 
 .btn-edit,
 .btn-delete {
@@ -264,7 +256,7 @@ table tbody tr:hover {
     background: #b91c1c;
 }
 
-/* ================= RESPONSIVE ================= */
+/* RESPONSIVE */
 
 @media (max-width: 768px) {
 

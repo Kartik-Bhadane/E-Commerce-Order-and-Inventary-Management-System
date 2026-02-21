@@ -7,9 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// ================================
-// UPDATE NAVBAR BASED ON LOGIN
-// ================================
+
 
 function updateNavbar() {
 

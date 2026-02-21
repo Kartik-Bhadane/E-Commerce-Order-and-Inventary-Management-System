@@ -1,9 +1,7 @@
 
 
 
-// ================================
-// LOGIN
-// ================================
+
 document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -39,9 +37,7 @@ document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
 });
 
 
-// ================================
-// REGISTER
-// ================================
+
 document.getElementById("registerForm")?.addEventListener("submit", async (e) => {
     e.preventDefault();
 

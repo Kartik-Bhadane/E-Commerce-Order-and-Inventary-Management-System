@@ -25,7 +25,7 @@ async function loadDashboardData() {
 }
 
 
-// LOAD RECENT ORDERS
+// LOAD RECENT 
 
 async function loadRecentOrders() {
     try {

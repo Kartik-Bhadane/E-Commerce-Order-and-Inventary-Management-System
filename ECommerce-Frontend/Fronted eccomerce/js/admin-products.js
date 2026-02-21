@@ -99,7 +99,6 @@ async function addProduct() {
 
 
 
-// ================= DELETE PRODUCT =================
 async function deleteProduct(id) {
     if (!confirm("Are you sure?")) return;
 

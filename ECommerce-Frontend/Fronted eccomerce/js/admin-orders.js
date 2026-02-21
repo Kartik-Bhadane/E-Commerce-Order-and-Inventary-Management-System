@@ -51,9 +51,7 @@ async function loadOrders() {
     }
 }
 
-// ============================
-// CANCEL ORDER (ADMIN)
-// ============================
+
 async function cancelOrder(orderId) {
 
     if (!confirm("Cancel this order?")) return;
