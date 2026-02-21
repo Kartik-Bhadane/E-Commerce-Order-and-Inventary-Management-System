@@ -35,28 +35,13 @@ async function loadDashboard() {
         document.getElementById("totalOrders").innerText = totalOrders;
 
 
-        // =========================
-        // FETCH TOTAL CUSTOMERS
-        // (MATCH BACKEND SPELLING)
-        // =========================
+    
         const userRes = await fetch(`${API_BASE_URL}/admin/orders/totalcustomer`, { headers });
         const totalCustomers = await userRes.json();
         document.getElementById("totalCustomers").innerText = totalCustomers;
 
 
-        // =========================
-        // FETCH ALL ORDERS TO CALCULATE REVENUE
-        // (You must have this API)
-        // =========================
-        // const allOrdersRes = await fetch(`${API_BASE_URL}/customer/orders`, { headers });
-        // const orders = await allOrdersRes.json();
-
-        // let revenue = 0;
-        // orders.forEach(order => {
-        //     revenue += order.totalAmount || 0;
-        // });
-
-        // document.getElementById("totalRevenue").innerText = "₹" + revenue;
+    
 
         const totalrevenue = await fetchData(`${API_BASE_URL}/admin/orders/totalrevenue`, headers);
 document.getElementById("totalRevenue").innerText = "₹" + totalrevenue;
@@ -83,6 +68,21 @@ document.getElementById("totalRevenue").innerText = "₹" + totalrevenue;
     } catch (error) {
         console.error("Dashboard Load Error:", error);
     }
+}
+function logout() {
+
+    if (!confirm("Are you sure you want to logout?"))
+        return;
+
+    // Remove token
+    localStorage.removeItem("token");
+
+
+    localStorage.removeItem("role");
+    localStorage.removeItem("email");
+
+  
+    window.location.href = "../login.html";
 }
 
 document.addEventListener("DOMContentLoaded", loadDashboard);
