@@ -19,4 +19,7 @@ public interface ProductService {
 
     // DELETE
     void deleteProduct(int id);
+    
+ // count the product
+    public Long totalProducts();
 }

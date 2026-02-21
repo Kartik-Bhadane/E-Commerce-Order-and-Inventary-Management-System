@@ -1,44 +1,54 @@
 package com.example.E_CommerceOrder.config;
 
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
-import org.springframework.stereotype.Component;
-
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
-import java.util.Map;
+
+import org.springframework.stereotype.Component;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+
 
 @Component
 public class JwtUtil {
 
-    private static final String SECRET =
-            "mysecretkeymysecretkeymysecretkey";
-    private static final long EXPIRATION = 86400000;
+    private static final String SECRET_KEY =
+            "placement_platform_secret_key_2026_secure_123456";
 
-    private final Key key =
-            Keys.hmacShaKeyFor(SECRET.getBytes());
+    private Key getSignKey() {
+        return Keys.hmacShaKeyFor(
+                SECRET_KEY.getBytes(StandardCharsets.UTF_8)
+        );
+    }
 
-    public String generateToken(String email, String role) {
+    public String generateToken(String username, String role) {
+
         return Jwts.builder()
-                .setSubject(email)
-                .addClaims(Map.of("role", role)) // CUSTOMER / ADMIN
+                .setSubject(username)
+                .claim("role", role)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
-                .signWith(key, SignatureAlgorithm.HS256)
+                .setExpiration(
+                        new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)
+                )
+                // ✅ IMPORTANT LINE (NO SignatureAlgorithm here)
+                .signWith(getSignKey())
                 .compact();
     }
 
     public String extractUsername(String token) {
-        return extractAllClaims(token).getSubject();
+        return getClaims(token).getSubject();
     }
 
+ // ✅ Extract Role (IMPORTANT FOR ADMIN ACCESS)
     public String extractRole(String token) {
-        return extractAllClaims(token).get("role", String.class);
+        return getClaims(token).get("role", String.class);
     }
-
-    private Claims extractAllClaims(String token) {
+    
+    private Claims getClaims(String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(key)
+                .setSigningKey(getSignKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();

@@ -14,4 +14,6 @@ public interface UserService {
 
     AuthResponsedto login(LoginRequestdto request);
     
+    public Long totalCustmer();
+    
 }

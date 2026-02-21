@@ -49,4 +49,9 @@ public class UserServiceImpl implements UserService {
                 user.getUserId()
         );
     }
+    
+    @Override
+    public Long totalCustmer() {
+    	return userRepository.count();
+    }
 }

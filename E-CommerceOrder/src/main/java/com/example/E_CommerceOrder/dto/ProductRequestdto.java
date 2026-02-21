@@ -6,6 +6,7 @@ public class ProductRequestdto {
     private Double price;
     private int categoryId;
     private Integer initialStock;   
+    private String imageUrl;
 
     public ProductRequestdto() {
     }
@@ -50,4 +51,12 @@ public class ProductRequestdto {
     public void setInitialStock(Integer initialStock) {
         this.initialStock = initialStock;
     }
+    
+    public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 }

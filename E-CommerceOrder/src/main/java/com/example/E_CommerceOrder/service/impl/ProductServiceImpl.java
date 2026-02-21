@@ -41,6 +41,7 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(dto.getDescription());
         product.setPrice(dto.getPrice());
         product.setCategory(category);
+        product.setImageUrl(dto.getImageUrl());
 
         Inventory inventory = new Inventory();
         inventory.setQuantityAvailable(dto.getInitialStock());
@@ -93,5 +94,11 @@ public class ProductServiceImpl implements ProductService {
 
         inventoryRepository.delete(product.getInventory());
         productRepository.delete(product);
+    }
+    
+    @Override
+    public Long totalProducts() {
+    	
+    	return productRepository.count();
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.E_CommerceOrder.dto.AdminOrderResponsedto;
 import com.example.E_CommerceOrder.dto.DashboardDTO;
+import com.example.E_CommerceOrder.dto.OrderItemResponsedto;
+import com.example.E_CommerceOrder.dto.OrderResponsedto;
 import com.example.E_CommerceOrder.entity.*;
 import com.example.E_CommerceOrder.repository.*;
 import com.example.E_CommerceOrder.service.OrderService;
@@ -25,6 +27,32 @@ public class OrderServiceImpl implements OrderService {
         this.orderRepo = orderRepo;
         this.userRepo = userRepo;
         this.cartRepo = cartRepo;
+    }
+    
+    //MAP TO DTO
+    private OrderResponsedto mapToDto(Order order) {
+
+        OrderResponsedto dto = new OrderResponsedto();
+        dto.setOrderId(order.getOrderId());
+        dto.setOrderDate(order.getOrderDate());
+        dto.setStatus(order.getStatus());
+        dto.setTotalAmount(order.getTotalAmount());
+        dto.setUserName(order.getUser().getFullName());
+        dto.setUserEmail(order.getUser().getEmail());
+
+        List<OrderItemResponsedto> itemDtos = new ArrayList<>();
+
+        for (OrderItem item : order.getItems()) {
+            itemDtos.add(new OrderItemResponsedto(
+                    item.getProduct().getProductId(),
+                    item.getProduct().getProductName(),
+                    item.getPrice(),
+                    item.getQuantity()
+            ));
+        }
+
+        dto.setItems(itemDtos);
+        return dto;
     }
 
     // 🛒 PLACE ORDER
@@ -120,4 +148,35 @@ public class OrderServiceImpl implements OrderService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	 @Override
+	    public Long totalOrders() {
+	    	return orderRepo.count();
+	    }
+	    
+	    @Override
+	    public Double tatalRevenue() {
+	    	double total=0;
+	    	for(Order order:orderRepo.findAll()) {
+	    		total += order.getTotalAmount();
+	    	}
+	    	return total;
+	    }
+	    
+	    //GET ALL ORDERS ACCORDING TO DATE
+	    @Override
+	    public List<OrderResponsedto> getAllOrder() {
+	    	
+	    	List<Order> orders = orderRepo.findAll();
+	    	orders.sort((a, b) -> b.getOrderDate().compareTo(a.getOrderDate()));
+	    	
+	    	
+
+	        List<OrderResponsedto> response = new ArrayList<>();
+	        
+	        for (Order order : orderRepo.findAll()) {
+	            response.add(mapToDto(order));
+	        }
+	        return response;
+	    }
 }

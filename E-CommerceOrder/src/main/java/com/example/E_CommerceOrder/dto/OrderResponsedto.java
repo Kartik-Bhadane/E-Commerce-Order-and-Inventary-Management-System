@@ -10,6 +10,8 @@ public class OrderResponsedto {
     private String status;
     private double totalAmount;
     private List<OrderItemResponsedto> items;
+    private String userName;
+    private String userEmail;
 
     public OrderResponsedto() {}
 
@@ -52,4 +54,20 @@ public class OrderResponsedto {
     public void setItems(List<OrderItemResponsedto> items) {
         this.items = items;
     }
+    
+    public String getUserName() {
+    	return userName;
+    }
+    
+    public void setUserName(String userName) {
+    	this.userName=userName;
+    }
+    
+    public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
 }
