@@ -24,9 +24,8 @@ public class AuthServiceImpl implements AuthService {
         this.jwtUtil = jwtUtil;
     }
 
-    // ================================
     // REGISTER
-    // ================================
+   
     @Override
     public void register(RegisterRequestdto request) throws AuthException {
 
@@ -43,9 +42,9 @@ public class AuthServiceImpl implements AuthService {
         repo.save(user);
     }
 
-    // ================================
+    
     // LOGIN
-    // ================================
+    
     @Override
     public AuthResponsedto login(LoginRequestdto request) throws AuthException {
 

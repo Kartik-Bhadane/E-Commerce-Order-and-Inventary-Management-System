@@ -47,14 +47,12 @@ async function loadDashboard() {
 document.getElementById("totalRevenue").innerText = "₹" + totalrevenue;
 
 
-        // =========================
-        // RECENT ORDERS (LAST 5)
-        // =========================
+
         const orders = await fetchData(`${API_BASE_URL}/admin/orders/getorder`,headers);
         const table = document.getElementById("recentOrdersTable");
         table.innerHTML = "";
 
-        orders.slice(0, 5).forEach(order => {
+        orders.slice(-5).reverse().forEach(order => {
             table.innerHTML += `
                 <tr>
                     <td>${order.orderId}</td>
